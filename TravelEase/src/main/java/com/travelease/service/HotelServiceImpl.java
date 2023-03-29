@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.travelease.Exceptions.HotelException;
 import com.travelease.models.Hotel;
 import com.travelease.repository.HotelDAO;
 
@@ -22,8 +23,10 @@ public class HotelServiceImpl implements HotelService {
 	}
 
 	@Override
-	public Optional<Hotel> getHotelById(Integer id) {
-		return hotelDAO.findById(id);
+	public Hotel getHotelById(Integer id) throws HotelException {
+		return hotelDAO.findById(id).
+				orElseThrow(() -> new HotelException("Hotel Not Found With Hotel ID :" + id));
+	
 	}
 
 
