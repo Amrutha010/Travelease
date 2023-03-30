@@ -58,6 +58,10 @@ public class TravelsServiceImpl implements TravelsService{
 			throw new TravelsNotFoundException("No travles found with enterd id");
 		}
 		
+		//setting travels null to each associated bus
+		searchedTravels.get().getBus().stream().forEach(s->{
+			s.setTravels(null);
+		});
 		
 		travelRepository.delete(searchedTravels.get());
 		
@@ -84,6 +88,7 @@ public class TravelsServiceImpl implements TravelsService{
 		// TODO Auto-generated method stub
 		
 		List<Travels> travelsList = travelRepository.findAll();
+		
 		
 		if(travelsList.isEmpty()) {
 			throw new TravelsNotFoundException("No travels available");

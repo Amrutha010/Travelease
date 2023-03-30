@@ -2,18 +2,22 @@ package com.travelease.models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 
 @Entity
@@ -22,23 +26,27 @@ public class Route {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer routeId;
-	@NotBlank(message = "this field should not be empty")
+	@Pattern(regexp = "^[A-Z]\\w*$")
 	private String routeFrom;
-	@NotBlank(message = "this field should not be empty")
+	@Pattern(regexp = "^[A-Z]\\w*$")
 	private String routeTo;
 	@Future
-//	@DateTimeFormat(pattern = "dd-MM-yyyy hh:mm")
-	@JsonFormat(pattern = "dd MMM uuuu hh:mm a")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	private LocalDateTime departureTime;
 	@Future
-	@JsonFormat(pattern = "dd MMM uuuu hh:mm a")
+	@JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	private LocalDateTime arrivalTime;
 	@Future
-	@JsonFormat(pattern = "dd MMM uuuu")
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate doj;
-	@NotBlank(message = "this field should not be empty")
+	@Pattern(regexp = "^[A-Z]\\w*$")
 	private String pickUpPoint;
 	private Double fare;
+	
+	
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@OneToMany(cascade = CascadeType.ALL , mappedBy = "route" )
+	private List<Bus> bus = new ArrayList<>();
 	
 	
 	public Route() {
@@ -46,10 +54,10 @@ public class Route {
 	}
 
 
-	
-
-	public Route(Integer routeId, String routeFrom, String routeTo, LocalDateTime departureTime,
-			LocalDateTime arrivalTime, LocalDate doj, String pickUpPoint, Double fare) {
+	public Route(Integer routeId, @Pattern(regexp = "^[A-Z]\\w*$") String routeFrom,
+			@Pattern(regexp = "^[A-Z]\\w*$") String routeTo, @Future LocalDateTime departureTime,
+			@Future LocalDateTime arrivalTime, @Future LocalDate doj,
+			@Pattern(regexp = "^[A-Z]\\w*$") String pickUpPoint, Double fare, List<Bus> bus) {
 		super();
 		this.routeId = routeId;
 		this.routeFrom = routeFrom;
@@ -59,9 +67,8 @@ public class Route {
 		this.doj = doj;
 		this.pickUpPoint = pickUpPoint;
 		this.fare = fare;
+		this.bus = bus;
 	}
-
-
 
 
 	public Integer getRouteId() {
@@ -144,13 +151,25 @@ public class Route {
 	}
 
 
+	public List<Bus> getBus() {
+		return bus;
+	}
+
+
+	public void setBus(List<Bus> bus) {
+		this.bus = bus;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Route [routeId=" + routeId + ", routeFrom=" + routeFrom + ", routeTo=" + routeTo + ", departureTime="
 				+ departureTime + ", arrivalTime=" + arrivalTime + ", doj=" + doj + ", pickUpPoint=" + pickUpPoint
-				+ ", fare=" + fare + "]";
+				+ ", fare=" + fare + ", bus=" + bus + "]";
 	}
+
+
 	
-	
+
 	
 }

@@ -52,9 +52,12 @@ public class RouteServiceImpl implements RouteService{
 			throw new RouteNotFoundException("route not found by entered id");
 		}
 		
-		System.out.println(gotRoute.get());
 		
 		Route deletedRoute = gotRoute.get();
+		
+		deletedRoute.getBus().stream().forEach(s->{
+			s.setRoute(null);
+		});
 		
 		routeRepository.delete(deletedRoute);
 		

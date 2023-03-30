@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelease.exception.BusNotFoundException;
+import com.travelease.exception.RouteAlreadyExistsException;
+import com.travelease.exception.RouteNotFoundException;
+import com.travelease.exception.TravelsAlreadyExistsException;
+import com.travelease.exception.TravelsNotFoundException;
 import com.travelease.models.Bus;
 
 import com.travelease.service.BusService;
@@ -78,6 +82,25 @@ public class BusController {
 		
 		return new ResponseEntity<Bus>(deletedBus, HttpStatus.ACCEPTED);
 		
+	}
+	
+	
+	
+	@PatchMapping("/bus/updateRoute")
+	public ResponseEntity<String> addNewROute(@RequestParam Integer busId , @RequestParam Integer routeId) throws BusNotFoundException, RouteNotFoundException, RouteAlreadyExistsException{
+		
+		String res = busService.addRoute(busId, routeId);
+		
+		return new ResponseEntity<String>(res, HttpStatus.OK);
+	}
+	
+	
+	@PatchMapping("/bus/updateTravels")
+	public ResponseEntity<String> addNewTravels(@RequestParam Integer busId , @RequestParam Integer travelsId) throws BusNotFoundException, TravelsNotFoundException, TravelsAlreadyExistsException{
+		
+		String res = busService.addTravels(busId, travelsId);
+		
+		return new ResponseEntity<String>(res, HttpStatus.OK);
 	}
 	
 

@@ -29,7 +29,16 @@ public class TravelsController {
 	@PostMapping("/travels")
 	public ResponseEntity<Travels> addTravels(@Valid @RequestBody Travels travels){
 		
+		
+//		travels.getBus().stream().forEach(s->{
+//			
+//			s.setTravels(travels);
+//		});
+		
 		Travels addedTravel = travelsService.addTravel(travels);
+		
+		
+//		System.out.println(addedTravel.getBus().get(0).getTravels());
 		
 		return new ResponseEntity<Travels>(addedTravel, HttpStatus.ACCEPTED);
 		
