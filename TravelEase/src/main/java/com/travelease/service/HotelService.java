@@ -12,7 +12,7 @@ public interface HotelService {
 
 	public Hotel getHotelById(Integer id)throws HotelException ;
 	
-	public Optional<Hotel> deleteHotel(Integer id)throws HotelException;
+	public Hotel deleteHotel(Integer id)throws HotelException;
 
 	public List<Hotel> AllHotels()throws HotelException;
 

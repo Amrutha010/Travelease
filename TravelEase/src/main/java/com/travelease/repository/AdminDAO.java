@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.travelease.models.Admin;
 
-@Repository
-public interface AdminDAO extends JpaRepository<Admin, Integer>{
-
-}
+//@Repository
+//public interface AdminDAO extends JpaRepository<Admin, Integer>{
+//
+//}

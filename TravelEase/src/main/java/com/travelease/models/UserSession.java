@@ -2,13 +2,12 @@ package com.travelease.models;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
-@Entity
+
+//@Entity
 public class UserSession {
 	
-	@Id
+//	@Id
 	private Integer userId;
 	private UserType userType;
 	private String Key;

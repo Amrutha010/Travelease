@@ -6,12 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.travelease.service.HotelService;
 
-@RestController
-@RequestMapping("/hotel")
+
 public class HotelController {
 
-	@Autowired
-	HotelService hs;
-	
-	
+//	@Autowired
+//	HotelService hs;
+//	
+//	
 }

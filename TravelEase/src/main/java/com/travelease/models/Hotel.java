@@ -1,11 +1,13 @@
 package com.travelease.models;
 
+import java.util.HashSet;
 import java.util.Objects;
-
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +21,7 @@ public class Hotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer hotel_Id;
+	
 	@NotNull
 	private String hotelName;
 	
@@ -26,8 +29,11 @@ public class Hotel {
 	private String hotelType;
 	@NotNull
 	private String hotelDescription;
-	@NotNull
-	private String hotelAddress;
+	
+
+	@NotNull(message = "Please mention Hotel Address")
+	@Embedded
+	private HotelAddress hotelAddress;
 	
 	@NotNull
 	private double Rent;
@@ -37,7 +43,7 @@ public class Hotel {
 
 	@OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Packages packages;
+	private Set<Packages> pSet = new HashSet<Packages>();
 
 	public Integer getHotel_Id() {
 		return hotel_Id;
@@ -71,11 +77,11 @@ public class Hotel {
 		this.hotelDescription = hotelDescription;
 	}
 
-	public String getHotelAddress() {
+	public HotelAddress getHotelAddress() {
 		return hotelAddress;
 	}
 
-	public void setHotelAddress(String hotelAddress) {
+	public void setHotelAddress(HotelAddress hotelAddress) {
 		this.hotelAddress = hotelAddress;
 	}
 
@@ -95,17 +101,18 @@ public class Hotel {
 		Status = status;
 	}
 
-	public Packages getPackages() {
-		return packages;
+	public Set<Packages> getpSet() {
+		return pSet;
 	}
 
-	public void setPackages(Packages packages) {
-		this.packages = packages;
+	public void setpSet(Set<Packages> pSet) {
+		this.pSet = pSet;
 	}
 
 	public Hotel(Integer hotel_Id, @NotNull String hotelName, @NotNull String hotelType,
-			@NotNull String hotelDescription, @NotNull String hotelAddress, @NotNull double rent,
-			@NotNull String status, Packages packages) {
+			@NotNull String hotelDescription,
+			@NotNull(message = "Please mention Hotel Address") HotelAddress hotelAddress, @NotNull double rent,
+			@NotNull String status, Set<Packages> pSet) {
 		super();
 		this.hotel_Id = hotel_Id;
 		this.hotelName = hotelName;
@@ -114,7 +121,7 @@ public class Hotel {
 		this.hotelAddress = hotelAddress;
 		Rent = rent;
 		Status = status;
-		this.packages = packages;
+		this.pSet = pSet;
 	}
 
 	public Hotel() {
@@ -123,32 +130,15 @@ public class Hotel {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(Rent, Status, hotelAddress, hotelDescription, hotelName, hotelType, hotel_Id, packages);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Hotel other = (Hotel) obj;
-		return Double.doubleToLongBits(Rent) == Double.doubleToLongBits(other.Rent)
-				&& Objects.equals(Status, other.Status) && Objects.equals(hotelAddress, other.hotelAddress)
-				&& Objects.equals(hotelDescription, other.hotelDescription)
-				&& Objects.equals(hotelName, other.hotelName) && Objects.equals(hotelType, other.hotelType)
-				&& Objects.equals(hotel_Id, other.hotel_Id) && Objects.equals(packages, other.packages);
-	}
-
-	@Override
 	public String toString() {
 		return "Hotel [hotel_Id=" + hotel_Id + ", hotelName=" + hotelName + ", hotelType=" + hotelType
 				+ ", hotelDescription=" + hotelDescription + ", hotelAddress=" + hotelAddress + ", Rent=" + Rent
-				+ ", Status=" + Status + ", packages=" + packages + "]";
+				+ ", Status=" + Status + ", pSet=" + pSet + "]";
 	}
+	
+	
+
+	
 	
 	
 	

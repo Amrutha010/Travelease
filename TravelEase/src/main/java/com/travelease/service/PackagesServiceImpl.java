@@ -19,8 +19,8 @@ public class PackagesServiceImpl implements PackagesService {
 	@Autowired
 	private PackagesDAO packageDAO;
 	
-	@Autowired
-	private HotelDAO hotelDAO;
+//	@Autowired
+//	private HotelDAO hotelDAO;
 
 	@Override
 	public Packages createPackage(Packages pgs) {
@@ -34,8 +34,8 @@ public class PackagesServiceImpl implements PackagesService {
 	}
 
 	@Override
-	public Optional<Packages> getPackageById(Integer id) throws PackagesException {
-		return packageDAO.findById(id);
+	public Packages getPackageById(Integer id) throws PackagesException {
+		return packageDAO.findById(id).get();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class PackagesServiceImpl implements PackagesService {
 		Packages p = packageDAO.findById(id).orElseThrow(() -> new PackagesException("Package is not available :" + id));
 		
 		if (p != null) {
-			packageDAO.deleteById(id);
+			packageDAO.delete(p);
 		}
 		return p;
 	}

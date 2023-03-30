@@ -10,7 +10,7 @@ import com.travelease.models.Packages;
 @Repository
 public interface PackagesDAO extends JpaRepository<Packages, Integer> {
 
-	void delete(Optional<Packages> opt);
+//	void delete(Optional<Packages> opt);
 
 	
 }
