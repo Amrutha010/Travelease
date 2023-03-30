@@ -10,7 +10,7 @@ import com.travelease.models.Hotel;
 @Repository
 public interface HotelDAO extends JpaRepository<Hotel, Integer> {
 
-	void delete(Optional<Hotel> opt);
+	
 
 }
 

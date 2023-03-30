@@ -1,14 +1,16 @@
 package com.travelease.models;
 
-import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
+
+
+
 @Entity
 public class Packages {
 
@@ -26,7 +28,7 @@ public class Packages {
 	
 	@NotNull
 	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "hotel_Id")
+	@JoinColumn(name = "hotel_Id")
 	private Hotel hotel;
 	
 //	private Bus bus;
@@ -35,7 +37,7 @@ public class Packages {
 	@NotNull
 	private Double packageCost;
 	
-	private PaymentDetails payment ;
+//	private PaymentDetails payment ;
 
 	public Integer getPackageId() {
 		return packageId;
@@ -77,29 +79,29 @@ public class Packages {
 		this.packageCost = packageCost;
 	}
 
-	public PaymentDetails getPayment() {
-		return payment;
-	}
-
-	public void setPayment(PaymentDetails payment) {
-		this.payment = payment;
-	}
+//	public PaymentDetails getPayment() {
+//		return payment;
+//	}
+//
+//	public void setPayment(PaymentDetails payment) {
+//		this.payment = payment;
+//	}
 
 	public Packages(Integer packageId, @NotNull String packageName, @NotNull String packageDescription,
-			@NotNull Hotel hotel, @NotNull Double packageCost, PaymentDetails payment) {
+			@NotNull Hotel hotel, @NotNull Double packageCost) {
 		super();
 		this.packageId = packageId;
 		this.packageName = packageName;
 		this.packageDescription = packageDescription;
 		this.hotel = hotel;
 		this.packageCost = packageCost;
-		this.payment = payment;
+		//this.payment = payment;
 	}
 
 	@Override
 	public String toString() {
 		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
-				+ packageDescription + ", hotel=" + hotel + ", packageCost=" + packageCost + ", payment=" + payment
+				+ packageDescription + ", hotel=" + hotel + ", packageCost=" + packageCost + ", payment=" 
 				+ "]";
 	}
 

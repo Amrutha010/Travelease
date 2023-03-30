@@ -1,7 +1,6 @@
 package com.travelease.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,15 +35,14 @@ public class HotelServiceImpl implements HotelService {
 	}
 
 	@Override
-	public Optional<Hotel> deleteHotel(Integer id) {
-		Optional<Hotel> opt = hotelDAO.findById(id);
+	public Hotel deleteHotel(Integer id)throws HotelException{
+		Hotel htl = hotelDAO.findById(id).get();
 		
-		if(opt.isEmpty()) ;
-			
-			Hotel htl= opt.get();
-			hotelDAO.delete(opt);
+		if(htl ==null)
+			throw new HotelException("Hotel Not Found");
+			hotelDAO.delete(htl);
 		
-		return opt;
+		return htl;
 	}
 
 }
