@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.travelease.Exceptions.PackagesException;
+import com.travelease.exception.BusNotFoundException;
+import com.travelease.exception.HotelException;
+import com.travelease.exception.PackagesException;
+import com.travelease.exception.RouteNotFoundException;
 import com.travelease.models.Packages;
 import com.travelease.service.PackagesService;
 
@@ -25,7 +28,7 @@ public class PackagesController {
 	private PackagesService ps;
 	
 	@PostMapping("/Packages")
-	public ResponseEntity<Packages> createPackages(@Valid @RequestBody Packages pkgs ) throws PackagesException{
+	public ResponseEntity<Packages> createPackages(@Valid @RequestBody Packages pkgs ) throws PackagesException, BusNotFoundException, RouteNotFoundException, HotelException{
 		return new ResponseEntity<>(ps.createPackage(pkgs),HttpStatus.CREATED);
 	}
 	

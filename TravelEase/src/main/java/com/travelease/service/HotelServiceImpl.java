@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.travelease.Exceptions.HotelException;
+import com.travelease.exception.HotelException;
 import com.travelease.models.Hotel;
 import com.travelease.repository.HotelDAO;
 

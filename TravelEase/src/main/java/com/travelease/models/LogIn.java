@@ -1,75 +1,65 @@
 package com.travelease.models;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+@Entity
 public class LogIn {
 	
+	@Id
 	@NotNull
-	@Email
-	private String email;
-	@NotNull
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,}$", message= "Min 1 uppercase letter.\n"
-    		+ "Min 1 lowercase letter.\n"
-    		+ "Min 1 special character [@$!%*#?&].\n"
-    		+ "Min 1 number.\n"
-    		+ "Min 6 characters.")
+	private Integer UserId;
+	
+	private String userName;
+	
+	
 	private String password;
-	@NotNull
-	private UserType userType;
-	public String getEmail() {
-		return email;
+
+	@Override
+	public String toString() {
+		return "LogIn [UserId=" + UserId + ", userName=" + userName + ", password=" + password + "]";
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public Integer getUserId() {
+		return UserId;
 	}
+
+	public void setUserId(Integer userId) {
+		UserId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public UserType getUserType() {
-		return userType;
-	}
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-	public LogIn(@NotNull @Email String email, @NotNull String password, @NotNull UserType userType) {
+
+	public LogIn(@NotNull Integer userId, String userName,
+			@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,}$", message = "Min 1 uppercase letter.\nMin 1 lowercase letter.\nMin 1 special character [@$!%*#?&].\nMin 1 number.\nMin 6 characters.") String password) {
 		super();
-		this.email = email;
+		UserId = userId;
+		this.userName = userName;
 		this.password = password;
-		this.userType = userType;
 	}
+
 	public LogIn() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(email, password, userType);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		LogIn other = (LogIn) obj;
-		return Objects.equals(email, other.email) && Objects.equals(password, other.password)
-				&& userType == other.userType;
-	}
-	@Override
-	public String toString() {
-		return "LogIn email=" + email + ", password=" + password + ", userType=" + userType + "";
-	}
+	
 	
 }
