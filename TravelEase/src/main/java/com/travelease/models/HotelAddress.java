@@ -3,6 +3,7 @@ package com.travelease.models;
 import java.util.Objects;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public class HotelAddress {
 
@@ -13,6 +14,7 @@ public class HotelAddress {
 	@NotNull
 	private String landmark;
 	@NotNull
+	@Pattern(regexp = "^\\{6}$")
 	private String pin;
 	public String getState() {
 		return state;

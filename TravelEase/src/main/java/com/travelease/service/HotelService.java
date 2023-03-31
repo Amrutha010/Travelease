@@ -3,7 +3,7 @@ package com.travelease.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.travelease.Exceptions.HotelException;
+import com.travelease.exception.HotelException;
 import com.travelease.models.Hotel;
 
 public interface HotelService {
