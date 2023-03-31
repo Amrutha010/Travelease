@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.travelease.exception.HotelException;
 import com.travelease.models.Hotel;
+import com.travelease.models.Route;
 import com.travelease.repository.HotelDAO;
 
 @Service
@@ -18,7 +19,9 @@ public class HotelServiceImpl implements HotelService {
 	
 	@Override
 	public Hotel createHotel(Hotel hotel) {
-		return hotelDAO.save(hotel);
+	
+		Hotel h= hotelDAO.save(hotel);
+		return h;
 	}
 
 	@Override
@@ -30,8 +33,14 @@ public class HotelServiceImpl implements HotelService {
 
 
 	@Override
-	public List<Hotel> AllHotels() {
-		return hotelDAO.findAll();
+	public List<Hotel> AllHotels() throws HotelException {
+		
+		 List<Hotel> list= hotelDAO.findAll();
+		 
+		 if(list ==null) {
+			 throw new HotelException("Hotel not found");
+		 }
+		return list;
 	}
 
 	@Override

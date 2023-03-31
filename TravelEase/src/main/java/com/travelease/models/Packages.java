@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 
@@ -20,6 +22,9 @@ public class Packages {
 	private Integer packageId;
 
 	@NotNull
+	@Pattern(regexp = "^[A-Za-z]$")
+	@Size(min = 4,message = "Package Name sholud be more than 4 letters and Alphabest")
+	
 	private String packageName;
 
 	@NotNull
@@ -123,11 +128,13 @@ public class Packages {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
 				+ packageDescription + ", routeId=" + routeId + ", hotel=" + hotel + ", bus=" + bus + ", packageCost="
-				+ packageCost + ", getHotelId=" + "]";
+				+ packageCost + "]";
 	}
 
 	public Integer getHotelId() {

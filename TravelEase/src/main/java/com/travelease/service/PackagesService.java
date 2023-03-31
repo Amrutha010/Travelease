@@ -20,7 +20,6 @@ public interface PackagesService {
 	
 	public Packages deletePackageById(Integer id) throws PackagesException;
 
-	
 	Packages updatePackages(Packages p);
 
 	

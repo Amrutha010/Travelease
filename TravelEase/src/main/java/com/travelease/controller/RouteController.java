@@ -55,16 +55,6 @@ public class RouteController {
 	}
 	
 	
-	@DeleteMapping("/route/{id}")
-	public ResponseEntity<Route> deletTravelsById(@PathVariable Integer id) throws RouteNotFoundException{
-		
-		Route gotRoute = routeService.removeRoute(id);
-		
-		return new ResponseEntity<Route>(gotRoute, HttpStatus.OK);
-		
-	}
-	
-	
 	@PostMapping("/route/update")
 	public ResponseEntity<Route> updateTravels(@Valid @RequestBody Route route) throws RouteNotFoundException{
 		
@@ -73,5 +63,7 @@ public class RouteController {
 		return new ResponseEntity<Route>(gotRoute, HttpStatus.OK);
 		
 	}
+	
+	
 	
 }

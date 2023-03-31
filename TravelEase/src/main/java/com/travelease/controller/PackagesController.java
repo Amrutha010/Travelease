@@ -29,23 +29,27 @@ public class PackagesController {
 	
 	@PostMapping("/Packages")
 	public ResponseEntity<Packages> createPackages(@Valid @RequestBody Packages pkgs ) throws PackagesException, BusNotFoundException, RouteNotFoundException, HotelException{
-		return new ResponseEntity<>(ps.createPackage(pkgs),HttpStatus.CREATED);
+		Packages pk= ps.createPackage(pkgs);
+		return new ResponseEntity<>(pkgs,HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/PackageById/{id}")
-	public ResponseEntity<List<Packages>> allPackages(@PathVariable("id") Integer Id) {
-		return new ResponseEntity<>(ps.AllPackages(Id),HttpStatus.FOUND);
+	public ResponseEntity<Packages> getPackagesbyId(@PathVariable("id") Integer Id) throws PackagesException {
+		Packages pk = ps.getPackageById(Id);
+		return new ResponseEntity<>(pk,HttpStatus.FOUND);
 	}
 	
 	@DeleteMapping("/Package/{id}")
 	public ResponseEntity<Packages> deletePackage(@PathVariable("id") Integer Id ) throws PackagesException{
-		return new ResponseEntity<>(ps.deletePackageById(Id),HttpStatus.ACCEPTED);
+		Packages pk =  ps.deletePackageById(Id);
+		return new ResponseEntity<>(pk,HttpStatus.ACCEPTED);
 		
 	}
 	
 	@GetMapping("/Packages")
-	public ResponseEntity<List<Packages>> viewAllPackages()  {
-		List<Packages>pgs=ps.AllPackages(null);
+	public ResponseEntity<List<Packages>> viewAllPackages(@PathVariable("id") Integer id)  {
+		List<Packages>pgs= ps.AllPackages(id);
+		
 		return new ResponseEntity<>(pgs,HttpStatus.FOUND);
 		
 	}
