@@ -8,7 +8,7 @@ public class AgentAddress {
 	
 	@Pattern(regexp = "^[A-Za-z\\s]+$")
 	private String city;
-	@Pattern(regexp = "^[A-Z]{2}$")
+	@Pattern(regexp = "^[A-Za-z\\s]+$")
 	private String state;
 	@Pattern(regexp = "^\\d{6}$")
 	private String pincode;

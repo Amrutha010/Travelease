@@ -45,7 +45,7 @@ public class Route {
 	
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToMany(cascade = CascadeType.ALL , mappedBy = "route" )
+	@OneToMany( mappedBy = "route" )
 	private List<Bus> bus = new ArrayList<>();
 	
 	
