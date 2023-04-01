@@ -1,4 +1,4 @@
-package com.travelease.repository;
+package com.travelease.service;
 
 import com.travelease.exception.LoginException;
 import com.travelease.models.LoginDTO;

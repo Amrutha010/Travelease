@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,15 +12,18 @@ import com.travelease.exception.LoginException;
 import com.travelease.models.LoginDTO;
 import com.travelease.models.Session;
 import com.travelease.models.UserType;
-import com.travelease.repository.LoginService;
+import com.travelease.service.LoginService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
+
 
 @RestController("/user")
 public class LoginController {
 
 	@Autowired
 	private LoginService lServices;
+	
+	
 	
 	@PostMapping("/login")
 	public ResponseEntity<Session> login(@RequestBody LoginDTO loginDto) throws LoginException{
