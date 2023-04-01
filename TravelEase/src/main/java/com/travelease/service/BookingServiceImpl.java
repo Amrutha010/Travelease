@@ -6,20 +6,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.travelease.Exceptions.BookingException;
+import com.travelease.exception.BookingException;
 import com.travelease.models.Booking;
 import com.travelease.models.BookingDTO;
 import com.travelease.models.BookingStatus;
 import com.travelease.models.Customer;
 import com.travelease.models.Packages;
+import com.travelease.models.Session;
 import com.travelease.models.TicketDetails;
 import com.travelease.repository.BookingDAO;
 import com.travelease.repository.BusDAO;
+import com.travelease.repository.BusRepository;
 import com.travelease.repository.CustomerDAO;
 import com.travelease.repository.PackagesDAO;
 import com.travelease.repository.TicketDetailsDAO;
 
-import jakarta.websocket.Session;
 
 @Service
 public class BookingServiceImpl implements BookingService{
@@ -37,7 +38,7 @@ public class BookingServiceImpl implements BookingService{
 	private TicketDetailsDAO ticketDetailsDao;
 
 	@Autowired
-	private BusDAO busDao;
+	private BusRepository busDao;
 
 
 	
@@ -51,7 +52,6 @@ public class BookingServiceImpl implements BookingService{
 				.orElseThrow(() -> new BookingException("Invalid Customer ID ! "));
 
 		if (bookedPackage != null ) {
-			if (bookedPackage.getCurrentAvailability() >= bookingDTO.getNoOfPersons()) {
 
 				// Creating New Booking
 				Booking booking = new Booking();
@@ -89,9 +89,6 @@ public class BookingServiceImpl implements BookingService{
 
 				// Saving The Booking To Database
 				return bookingDao.save(booking);
-			} else {
-				throw new BookingException("Number Of Person Is Greater Than Available Seats.");
-			}
 		} else
 			throw new BookingException("Package And Customer Cannot Be Null !");
 	}
@@ -100,19 +97,11 @@ public class BookingServiceImpl implements BookingService{
 	public Booking cancelBookingById(Integer bookingId) throws BookingException {
 		Booking currentBooking = bookingDao.findById(bookingId)
 				.orElseThrow(() -> new BookingException("Bookings Not Found With Packages ID :" + bookingId));
-
 		currentBooking.setBookingStatus(BookingStatus.CANCELLED);
-
 		Packages cancelledPackage = currentBooking.getPackages();
-
-		cancelledPackage.setPackageStatus(currentBooking.getNoOfPersons() - (currentBooking.getNoOfPersons() * 2));
-
 		busDao.save(cancelledPackage.getBus());
-
 		bookingDao.save(currentBooking);
-
 		packageDAO.save(cancelledPackage);
-
 		return currentBooking;
 	}
 
@@ -126,5 +115,7 @@ public class BookingServiceImpl implements BookingService{
 	public List<Booking> viewAllBookings() throws BookingException {
 		return bookingDao.findAll();
 	}
+
+	
 
 }

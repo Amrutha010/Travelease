@@ -20,7 +20,7 @@ public class Hotel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer hotel_Id;
+	private Integer hotelId;
 	
 	@NotNull
 	private String hotelName;
@@ -45,12 +45,19 @@ public class Hotel {
 	@JsonIgnore
 	private Set<Packages> pSet = new HashSet<Packages>();
 
-	public Integer getHotel_Id() {
-		return hotel_Id;
+	@Override
+	public String toString() {
+		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", hotelType=" + hotelType
+				+ ", hotelDescription=" + hotelDescription + ", hotelAddress=" + hotelAddress + ", Rent=" + Rent
+				+ ", Status=" + Status + ", pSet=" + pSet + "]";
 	}
 
-	public void setHotel_Id(Integer hotel_Id) {
-		this.hotel_Id = hotel_Id;
+	public Integer getHotelId() {
+		return hotelId;
+	}
+
+	public void setHotelId(Integer hotelId) {
+		this.hotelId = hotelId;
 	}
 
 	public String getHotelName() {
@@ -109,12 +116,12 @@ public class Hotel {
 		this.pSet = pSet;
 	}
 
-	public Hotel(Integer hotel_Id, @NotNull String hotelName, @NotNull String hotelType,
+	public Hotel(Integer hotelId, @NotNull String hotelName, @NotNull String hotelType,
 			@NotNull String hotelDescription,
 			@NotNull(message = "Please mention Hotel Address") HotelAddress hotelAddress, @NotNull double rent,
 			@NotNull String status, Set<Packages> pSet) {
 		super();
-		this.hotel_Id = hotel_Id;
+		this.hotelId = hotelId;
 		this.hotelName = hotelName;
 		this.hotelType = hotelType;
 		this.hotelDescription = hotelDescription;
@@ -129,13 +136,6 @@ public class Hotel {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "Hotel [hotel_Id=" + hotel_Id + ", hotelName=" + hotelName + ", hotelType=" + hotelType
-				+ ", hotelDescription=" + hotelDescription + ", hotelAddress=" + hotelAddress + ", Rent=" + Rent
-				+ ", Status=" + Status + ", pSet=" + pSet + "]";
-	}
-	
 	
 
 	

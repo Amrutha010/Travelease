@@ -1,5 +1,6 @@
 package com.travelease.models;
 
+
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -164,3 +165,4 @@ public class Booking {
 		this.bookingStatus = bookingStatus;
 	}
 }
+
