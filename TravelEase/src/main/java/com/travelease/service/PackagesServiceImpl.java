@@ -43,23 +43,23 @@ public class PackagesServiceImpl implements PackagesService {
 	public Packages createPackage(Packages pgs) throws HotelException, RouteNotFoundException, BusNotFoundException {
 		Packages pkg = new Packages();
 		
-		pkg.setPackageId(pgs.getPackageId());
+//		pkg.setPackageId(pgs.getPackageId());
 		pkg.setPackageName(pgs.getPackageName());
 		pkg.setPackageCost(pgs.getPackageCost());
 		pkg.setPackageId(pgs.getPackageId());
 		pkg.setPackageDescription(pgs.getPackageDescription());
 		
-		Hotel hotel= hotelRepo.findById(pgs.getHotelId())
-				.orElseThrow(() -> new HotelException("Hotel Not Found With HotelID : " + pgs.getHotelId()));
+		Hotel hotel= hotelRepo.findById(pgs.getHotel().getHotelId())
+				.orElseThrow(() -> new HotelException("Hotel Not Found With HotelID : " + pgs.getHotel().getHotelId()));
 
-		Route route = routeRepo.findById(pgs.getRouteId().getRouteId())
-				.orElseThrow(() -> new RouteNotFoundException("Route Not Found With Route ID : " + pgs.getRouteId().getRouteId()));
+		Route route = routeRepo.findById(pgs.getRoute().getRouteId())
+				.orElseThrow(() -> new RouteNotFoundException("Route Not Found With Route ID : " + pgs.getRoute().getRouteId()));
 
 		
 		Bus bus = busRepo.findById(pgs.getBus().getBusID())
 				.orElseThrow(() -> new BusNotFoundException("Bus Not Found With Bus ID : "+ pgs.getBus().getBusID()));
 		pkg.setHotel(hotel);
-		pkg.setRouteId(route);
+		pkg.setRoute(route);
 		pkg.setBus(bus);
 		
 		Packages newPkg= packRepo.save(pkg);

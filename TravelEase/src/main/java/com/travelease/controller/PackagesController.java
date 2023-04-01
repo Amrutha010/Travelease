@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelease.exception.BusNotFoundException;
@@ -18,7 +19,7 @@ import com.travelease.exception.RouteNotFoundException;
 import com.travelease.models.Packages;
 import com.travelease.service.PackagesService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+//import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,7 +31,7 @@ public class PackagesController {
 	@PostMapping("/Packages")
 	public ResponseEntity<Packages> createPackages(@Valid @RequestBody Packages pkgs ) throws PackagesException, BusNotFoundException, RouteNotFoundException, HotelException{
 		Packages pk= ps.createPackage(pkgs);
-		return new ResponseEntity<>(pkgs,HttpStatus.CREATED);
+		return new ResponseEntity<>(pk,HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/PackageById/{id}")

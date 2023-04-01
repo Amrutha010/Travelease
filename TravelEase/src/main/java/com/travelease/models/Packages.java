@@ -18,131 +18,152 @@ import jakarta.validation.constraints.Size;
 public class Packages {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer packageId;
 
-	@NotNull
-	@Pattern(regexp = "^[A-Za-z]$")
+
+//	@Pattern(regexp = "^[A-Za-z]$")
 	@Size(min = 4,message = "Package Name sholud be more than 4 letters and Alphabest")
-	
 	private String packageName;
 
-	@NotNull
+//	@NotNull
 	private String packageDescription;
 	
-	@NotNull
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "routeId")
-	private Route routeId;
+	private Route route;
 	
-	@NotNull
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "hotelId")
 	private Hotel hotel;
 	
-	@NotNull
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "busId")
 	private Bus bus;
 	
 	
-	@NotNull
+	
 	@Min(value=5000)
 	private Double packageCost;
+
+
+
+	public Packages(Integer packageId,
+			@Size(min = 4, message = "Package Name sholud be more than 4 letters and Alphabest") String packageName,
+			String packageDescription, Route route, Hotel hotel, Bus bus, @Min(5000) Double packageCost) {
+		super();
+		this.packageId = packageId;
+		this.packageName = packageName;
+		this.packageDescription = packageDescription;
+		this.route = route;
+		this.hotel = hotel;
+		this.bus = bus;
+		this.packageCost = packageCost;
+	}
+
+
+
+	public Packages() {
+		super();
+	}
+
 
 
 	public Integer getPackageId() {
 		return packageId;
 	}
 
+
+
 	public void setPackageId(Integer packageId) {
 		this.packageId = packageId;
 	}
+
+
 
 	public String getPackageName() {
 		return packageName;
 	}
 
+
+
 	public void setPackageName(String packageName) {
 		this.packageName = packageName;
 	}
+
+
 
 	public String getPackageDescription() {
 		return packageDescription;
 	}
 
+
+
 	public void setPackageDescription(String packageDescription) {
 		this.packageDescription = packageDescription;
 	}
 
-	public Route getRouteId() {
-		return routeId;
+
+
+	public Route getRoute() {
+		return route;
 	}
 
-	public void setRouteId(Route routeId) {
-		this.routeId = routeId;
+
+
+	public void setRoute(Route route) {
+		this.route = route;
 	}
+
+
 
 	public Hotel getHotel() {
 		return hotel;
 	}
 
+
+
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
+
+
 
 	public Bus getBus() {
 		return bus;
 	}
 
+
+
 	public void setBus(Bus bus) {
 		this.bus = bus;
 	}
+
+
 
 	public Double getPackageCost() {
 		return packageCost;
 	}
 
+
+
 	public void setPackageCost(Double packageCost) {
 		this.packageCost = packageCost;
 	}
 
-	
 
-	public Packages(Integer packageId, @NotNull String packageName, @NotNull String packageDescription,
-			@NotNull Route routeId, @NotNull Hotel hotel, @NotNull Bus bus, @NotNull @Min(5000) Double packageCost,
-			Integer getHotelId) {
-		super();
-		this.packageId = packageId;
-		this.packageName = packageName;
-		this.packageDescription = packageDescription;
-		this.routeId = routeId;
-		this.hotel = hotel;
-		this.bus = bus;
-		this.packageCost = packageCost;
-	
-	}
-
-	public Packages() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	
 
 	@Override
 	public String toString() {
 		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
-				+ packageDescription + ", routeId=" + routeId + ", hotel=" + hotel + ", bus=" + bus + ", packageCost="
+				+ packageDescription + ", route=" + route + ", hotel=" + hotel + ", bus=" + bus + ", packageCost="
 				+ packageCost + "]";
 	}
 
-	public Integer getHotelId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
+	
 	
 	
 }

@@ -19,26 +19,27 @@ import jakarta.validation.constraints.NotNull;
 public class Hotel {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer hotelId;
 	
-	@NotNull
+//	@NotNull
 	private String hotelName;
 	
-	@NotNull
+//	@NotNull
 	private String hotelType;
-	@NotNull
+	
+//	@NotNull
 	private String hotelDescription;
 	
 
-	@NotNull(message = "Please mention Hotel Address")
+//	@NotNull(message = "Please mention Hotel Address")
 	@Embedded
 	private HotelAddress hotelAddress;
 	
-	@NotNull
+//	@NotNull
 	private double Rent;
 	
-	@NotNull
+//	@NotNull
 	private String Status;
 
 	@OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL)
@@ -116,10 +117,10 @@ public class Hotel {
 		this.pSet = pSet;
 	}
 
-	public Hotel(Integer hotelId, @NotNull String hotelName, @NotNull String hotelType,
-			@NotNull String hotelDescription,
-			@NotNull(message = "Please mention Hotel Address") HotelAddress hotelAddress, @NotNull double rent,
-			@NotNull String status, Set<Packages> pSet) {
+	
+
+	public Hotel(Integer hotelId, String hotelName, String hotelType, String hotelDescription,
+			HotelAddress hotelAddress, double rent, String status, Set<Packages> pSet) {
 		super();
 		this.hotelId = hotelId;
 		this.hotelName = hotelName;

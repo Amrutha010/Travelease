@@ -7,14 +7,14 @@ import jakarta.validation.constraints.Pattern;
 
 public class HotelAddress {
 
-	@NotNull
+//	@NotNull
 	private String state;
-	@NotNull
+//	@NotNull
 	private String city;
-	@NotNull
+//	@NotNull
 	private String landmark;
-	@NotNull
-	@Pattern(regexp = "^\\{6}$")
+	
+	@Pattern(regexp = "^\\d{6}$" , message = "Pincode should be 6 digits only")
 	private String pin;
 	public String getState() {
 		return state;
