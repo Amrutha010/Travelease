@@ -13,32 +13,35 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 public class Hotel {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer hotelId;
 	
-	@NotNull
+	@Pattern(regexp = "^[A-Za-z\\s]+$")
 	private String hotelName;
 	
-	@NotNull
+	@Pattern(regexp = "^[A-Za-z\\s]+$")
 	private String hotelType;
-	@NotNull
+	
+	@Pattern(regexp = "^[A-Za-z\\s]+$")
 	private String hotelDescription;
 	
 
-	@NotNull(message = "Please mention Hotel Address")
+	
 	@Embedded
 	private HotelAddress hotelAddress;
 	
-	@NotNull
+	@Min(value=1000)
 	private double Rent;
 	
-	@NotNull
+	
 	private String Status;
 
 	@OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL)
@@ -116,10 +119,11 @@ public class Hotel {
 		this.pSet = pSet;
 	}
 
-	public Hotel(Integer hotelId, @NotNull String hotelName, @NotNull String hotelType,
-			@NotNull String hotelDescription,
-			@NotNull(message = "Please mention Hotel Address") HotelAddress hotelAddress, @NotNull double rent,
-			@NotNull String status, Set<Packages> pSet) {
+	
+	public Hotel(Integer hotelId, @Pattern(regexp = "^[A-Za-z\\s]+$") String hotelName,
+			@Pattern(regexp = "^[A-Za-z\\s]+$") String hotelType,
+			@Pattern(regexp = "^[A-Za-z\\s]+$") String hotelDescription, HotelAddress hotelAddress,
+			@Min(1000) double rent, String status, Set<Packages> pSet) {
 		super();
 		this.hotelId = hotelId;
 		this.hotelName = hotelName;

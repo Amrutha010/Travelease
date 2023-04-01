@@ -7,14 +7,14 @@ import jakarta.validation.constraints.Pattern;
 
 public class HotelAddress {
 
-	@NotNull
+	@Pattern(regexp = "^[A-Z]{2}$")
 	private String state;
-	@NotNull
+	@Pattern(regexp = "^[A-Za-z\\s]+$")
 	private String city;
-	@NotNull
+	
 	private String landmark;
-	@NotNull
-	@Pattern(regexp = "^\\{6}$")
+	
+	@Pattern(regexp = "^\\d{6}$")
 	private String pin;
 	public String getState() {
 		return state;
@@ -40,7 +40,10 @@ public class HotelAddress {
 	public void setPin(String pin) {
 		this.pin = pin;
 	}
-	public HotelAddress(@NotNull String state, @NotNull String city, @NotNull String landmark, @NotNull String pin) {
+	
+	
+	public HotelAddress(@Pattern(regexp = "^[A-Z]{2}$") String state, @Pattern(regexp = "^[A-Za-z\\s]+$") String city,
+			String landmark, @Pattern(regexp = "^\\d{6}$") String pin) {
 		super();
 		this.state = state;
 		this.city = city;
