@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.travelease.exception.BusNotFoundException;
 import com.travelease.exception.RouteAlreadyExistsException;
 import com.travelease.exception.RouteNotFoundException;
+import com.travelease.exception.SessionException;
 import com.travelease.exception.TravelsAlreadyExistsException;
 import com.travelease.exception.TravelsNotFoundException;
 import com.travelease.models.Bus;
@@ -35,7 +36,7 @@ public class BusController {
 	
 	
 	@PostMapping("/bus")
-	public ResponseEntity<Bus> addBus(@Valid @RequestBody Bus bus){
+	public ResponseEntity<Bus> addBus(@Valid @RequestBody Bus bus , @RequestParam("sessionKey")String sessionKey) throws SessionException{
 		
 		System.out.println(bus);
 		
