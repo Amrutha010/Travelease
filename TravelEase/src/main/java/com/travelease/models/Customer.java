@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -23,20 +24,20 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
 	
-	@NotNull
+	@NotBlank(message = "customerName cannot be null")
 	private String customerName;
 	
-	@NotNull
+	@NotBlank(message = "customerpassword cannot be null")
 	private String customerPassword;
 	
-	@NotNull
+	@NotBlank(message = "customeraddress cannot be null")
 	private String address;
 	
-	@NotNull
+	@NotBlank(message = "customeremail cannot be null")
 	@Email
 	private String email;
 	
-	@NotNull
+	@NotBlank(message = "customermobile cannot be null")
 	@Size(min = 10, max = 10)
 	private String mobile;
 	
