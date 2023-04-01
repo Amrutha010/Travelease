@@ -52,14 +52,14 @@ public class PackagesServiceImpl implements PackagesService {
 		Hotel hotel= hotelRepo.findById(pgs.getHotelId())
 				.orElseThrow(() -> new HotelException("Hotel Not Found With HotelID : " + pgs.getHotelId()));
 
-		Route route = routeRepo.findById(pgs.getRouteId().getRouteId())
-				.orElseThrow(() -> new RouteNotFoundException("Route Not Found With Route ID : " + pgs.getRouteId().getRouteId()));
+		Route route = routeRepo.findById(pgs.getRoute().getRouteId())
+				.orElseThrow(() -> new RouteNotFoundException("Route Not Found With Route ID : " + pgs.getRoute().getRouteId()));
 
 		
 		Bus bus = busRepo.findById(pgs.getBus().getBusID())
 				.orElseThrow(() -> new BusNotFoundException("Bus Not Found With Bus ID : "+ pgs.getBus().getBusID()));
 		pkg.setHotel(hotel);
-		pkg.setRouteId(route);
+		pkg.setRoute(route);
 		pkg.setBus(bus);
 		
 		Packages newPkg= packRepo.save(pkg);

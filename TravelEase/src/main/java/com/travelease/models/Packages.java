@@ -18,35 +18,35 @@ import jakarta.validation.constraints.Size;
 public class Packages {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer packageId;
 
-	@NotNull
-	@Pattern(regexp = "^[A-Za-z]$")
+	
+	@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$")
 	@Size(min = 4,message = "Package Name sholud be more than 4 letters and Alphabest")
 	
 	private String packageName;
 
-	@NotNull
+	@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$")
 	private String packageDescription;
 	
-	@NotNull
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "routeId")
-	private Route routeId;
+	private Route route;
 	
-	@NotNull
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "hotelId")
 	private Hotel hotel;
 	
-	@NotNull
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "busId")
 	private Bus bus;
 	
 	
-	@NotNull
+	
 	@Min(value=5000)
 	private Double packageCost;
 
@@ -75,12 +75,12 @@ public class Packages {
 		this.packageDescription = packageDescription;
 	}
 
-	public Route getRouteId() {
-		return routeId;
+	public Route getRoute() {
+		return route;
 	}
 
-	public void setRouteId(Route routeId) {
-		this.routeId = routeId;
+	public void setRoute(Route routeId) {
+		this.route = route;
 	}
 
 	public Hotel getHotel() {
@@ -109,18 +109,20 @@ public class Packages {
 
 	
 
-	public Packages(Integer packageId, @NotNull String packageName, @NotNull String packageDescription,
-			@NotNull Route routeId, @NotNull Hotel hotel, @NotNull Bus bus, @NotNull @Min(5000) Double packageCost,
-			Integer getHotelId) {
+	
+	
+	public Packages(Integer packageId,
+			@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$") @Size(min = 4, message = "Package Name sholud be more than 4 letters and Alphabest") String packageName,
+			@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$") String packageDescription, Route route, Hotel hotel, Bus bus,
+			@Min(5000) Double packageCost) {
 		super();
 		this.packageId = packageId;
 		this.packageName = packageName;
 		this.packageDescription = packageDescription;
-		this.routeId = routeId;
+		this.route = route;
 		this.hotel = hotel;
 		this.bus = bus;
 		this.packageCost = packageCost;
-	
 	}
 
 	public Packages() {
@@ -133,7 +135,7 @@ public class Packages {
 	@Override
 	public String toString() {
 		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
-				+ packageDescription + ", routeId=" + routeId + ", hotel=" + hotel + ", bus=" + bus + ", packageCost="
+				+ packageDescription + ", route=" + route + ", hotel=" + hotel + ", bus=" + bus + ", packageCost="
 				+ packageCost + "]";
 	}
 
