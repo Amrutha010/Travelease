@@ -30,7 +30,7 @@ public class PackagesController {
 	@PostMapping("/Packages")
 	public ResponseEntity<Packages> createPackages(@Valid @RequestBody Packages pkgs ) throws PackagesException, BusNotFoundException, RouteNotFoundException, HotelException{
 		Packages pk= ps.createPackage(pkgs);
-		return new ResponseEntity<>(pkgs,HttpStatus.CREATED);
+		return new ResponseEntity<>(pk,HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/PackageById/{id}")
