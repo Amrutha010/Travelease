@@ -41,34 +41,11 @@ public class PackagesServiceImpl implements PackagesService {
 
 	@Override
 	public Packages createPackage(Packages pgs) throws HotelException, RouteNotFoundException, BusNotFoundException {
-		Packages pkg = new Packages();
+		Packages pkg = packRepo.save(pgs);
 		
-		pkg.setPackageId(pgs.getPackageId());
-		pkg.setPackageName(pgs.getPackageName());
-		pkg.setPackageCost(pgs.getPackageCost());
-		pkg.setPackageId(pgs.getPackageId());
-		pkg.setPackageDescription(pgs.getPackageDescription());
 		
-		Hotel hotel= hotelRepo.findById(pgs.getHotelId())
-				.orElseThrow(() -> new HotelException("Hotel Not Found With HotelID : " + pgs.getHotelId()));
-
-		Route route = routeRepo.findById(pgs.getRoute().getRouteId())
-				.orElseThrow(() -> new RouteNotFoundException("Route Not Found With Route ID : " + pgs.getRoute().getRouteId()));
-
 		
-		Bus bus = busRepo.findById(pgs.getBus().getBusID())
-				.orElseThrow(() -> new BusNotFoundException("Bus Not Found With Bus ID : "+ pgs.getBus().getBusID()));
-		pkg.setHotel(hotel);
-		pkg.setRoute(route);
-		pkg.setBus(bus);
-		
-		Packages newPkg= packRepo.save(pkg);
-		
-		hotelRepo.save(hotel);
-		routeRepo.save(route);
-		busRepo.save(bus);
-		
-		return newPkg;
+		return pkg;
 	}
 
 	@Override
