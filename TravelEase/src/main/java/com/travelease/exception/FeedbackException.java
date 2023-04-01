@@ -1,4 +1,4 @@
-package com.travelease.Exceptions;
+package com.travelease.exception;
 
 public class FeedbackException extends Exception{
 

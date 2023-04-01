@@ -12,14 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.travelease.Exceptions.FeedbackException;
+import com.travelease.exception.BookingException;
+import com.travelease.exception.CustomerException;
+import com.travelease.exception.FeedbackException;
+import com.travelease.exception.PackagesException;
+import com.travelease.exception.SessionException;
 import com.travelease.models.Feedback;
 import com.travelease.models.FeedbackDTO;
+import com.travelease.models.Session;
+import com.travelease.models.UserType;
 import com.travelease.service.FeedbackServices;
+import com.travelease.service.SessionServices;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
-import jakarta.websocket.Session;
 
 @RestController
 @RequestMapping("/feedbacks")
@@ -31,7 +37,7 @@ public class FeedbackController {
 	private SessionServices sServices;
 	
 	@PostMapping("/addfeedback")
-	public ResponseEntity<Feedback> addfeedback(@Valid @RequestBody FeedbackDTO feedback, @RequestParam("sessionKey")String sessionKey) throws FeedbackException, BookingException, PackageException, SessionException{
+	public ResponseEntity<Feedback> addfeedback(@Valid @RequestBody FeedbackDTO feedback, @RequestParam("sessionKey")String sessionKey) throws FeedbackException, BookingException, PackagesException, SessionException{
 		Session session = sServices.getASessionByKey(sessionKey);
 		if(session.getUserType()==UserType.CUSTOMER) {
 			return new ResponseEntity<Feedback>(fServices.addFeedback(feedback),HttpStatus.OK);
@@ -60,7 +66,7 @@ public class FeedbackController {
 	}
 	
 	@GetMapping("/feedbackbypackageid/{id}")
-	public ResponseEntity<List<Feedback>> findFeedbackByPackageId(@PathVariable("id") Integer id) throws FeedbackException, PackageException, SessionException{
+	public ResponseEntity<List<Feedback>> findFeedbackByPackageId(@PathVariable("id") Integer id) throws FeedbackException, PackagesException, SessionException{
 
 		return new ResponseEntity<List<Feedback>>(fServices.findFeedbackByPackageId(id), HttpStatus.OK);
 		

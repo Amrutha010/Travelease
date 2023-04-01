@@ -1,5 +1,6 @@
 package com.travelease.models;
 
+
 import java.util.ArrayList;
 import java.util.List;
 

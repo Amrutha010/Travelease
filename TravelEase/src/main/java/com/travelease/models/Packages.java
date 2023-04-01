@@ -50,6 +50,8 @@ public class Packages {
 	@Min(value=5000)
 	private Double packageCost;
 
+	
+	private double packageRating;
 
 	public Integer getPackageId() {
 		return packageId;
@@ -140,6 +142,14 @@ public class Packages {
 	public Integer getHotelId() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public double getPackageRating() {
+		return packageRating;
+	}
+
+	public void setPackageRating(double packageRating) {
+		this.packageRating = packageRating;
 	}
 
 

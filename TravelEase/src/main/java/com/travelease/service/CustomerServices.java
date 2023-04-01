@@ -2,7 +2,7 @@ package com.travelease.service;
 
 import java.util.List;
 
-import com.travelease.Exceptions.CustomerException;
+import com.travelease.exception.CustomerException;
 import com.travelease.models.Customer;
 
 public interface CustomerServices {

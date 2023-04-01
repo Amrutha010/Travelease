@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.travelease.Exceptions.CustomerException;
+import com.travelease.exception.CustomerException;
 import com.travelease.models.Customer;
 import com.travelease.repository.CustomerDAO;
 

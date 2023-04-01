@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.travelease.exception.HotelException;
 import com.travelease.models.Hotel;
 import com.travelease.service.HotelService;
-import com.travelease.service.LoginService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
@@ -27,8 +26,6 @@ public class HotelController {
 	@Autowired
 	HotelService hs;
 	
-	@Autowired
-	LoginService ls;
 	
 	
 	@PostMapping("/Hotel")

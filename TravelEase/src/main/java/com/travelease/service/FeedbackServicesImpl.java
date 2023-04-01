@@ -3,37 +3,41 @@ package com.travelease.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.travelease.Exceptions.CustomerException;
-import com.travelease.Exceptions.FeedbackException;
+import com.travelease.exception.BookingException;
+import com.travelease.exception.CustomerException;
+import com.travelease.exception.FeedbackException;
+import com.travelease.exception.PackagesException;
 import com.travelease.models.Feedback;
 import com.travelease.models.FeedbackDTO;
 import com.travelease.models.Packages;
 import com.travelease.repository.FeedbackDAO;
 
+@Service
 public class FeedbackServicesImpl implements FeedbackServices{
 
 	@Autowired
 	private FeedbackDAO fDao;
 	
 	@Autowired
-	private BookingServices bServices;
+	private BookingService bServices;
 	
 	@Autowired
 	private CustomerServices cServices;
 	
 	@Autowired
-	private PackageServices pServices;
+	private PackagesService pServices;
 
 	@Override
-	public Feedback addFeedback(FeedbackDTO feedback) throws FeedbackException, BookingException, PackageException { //use feedbackDto
+	public Feedback addFeedback(FeedbackDTO feedback) throws FeedbackException, BookingException, PackagesException { //use feedbackDto
 		
 		Feedback newFeedback= new Feedback();
 		newFeedback.setFeedback(feedback.getFeedback());
 		newFeedback.setRating(feedback.getRating());
 		newFeedback.setBooking(bServices.ViewBookingById(feedback.getBookingId()));
 		newFeedback.setCustomer(bServices.ViewBookingById(feedback.getBookingId()).getCustomer());
-		Packages p= pServices.searchPackageById(feedback.getPackageId());
+		Packages p= pServices.getPackageById(feedback.getPackageId());
 		
 		newFeedback.setPackages(p);
 		
@@ -46,15 +50,12 @@ public class FeedbackServicesImpl implements FeedbackServices{
 		}
 		double avg =sum/feedbacks.size();
 		
-		p.setPackageRating(avg+"");
+		p.setPackageRating(avg);
 		
-		pServices.updatePackage(p);
+		pServices.updatePackages(p);
 		
 		return feedback2;
 		
-//		fDao.getavgfeedbackbypackId() //2
-		//update average rating inside package 3
-//		packageService.updatePackage.save(package) //4
 	}
 
 	@Override
@@ -75,9 +76,9 @@ public class FeedbackServicesImpl implements FeedbackServices{
 	}
 	
 	@Override
-	public List<Feedback> findFeedbackByPackageId(Integer packageId) throws PackageException{
+	public List<Feedback> findFeedbackByPackageId(Integer packageId) throws PackagesException{
 		
-		Packages mypackage=pServices.searchPackageById(packageId);
+		Packages mypackage=pServices.getPackageById(packageId);
 		
 		return fDao.findByPackages(mypackage);
 		

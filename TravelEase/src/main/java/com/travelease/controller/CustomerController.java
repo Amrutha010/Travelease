@@ -14,14 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.travelease.Exceptions.CustomerException;
+import com.travelease.exception.CustomerException;
+import com.travelease.exception.SessionException;
 import com.travelease.models.Customer;
+import com.travelease.models.Session;
 import com.travelease.models.UserType;
 import com.travelease.service.CustomerServices;
+import com.travelease.service.SessionServices;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
-import jakarta.websocket.Session;
 
 @RestController
 @RequestMapping

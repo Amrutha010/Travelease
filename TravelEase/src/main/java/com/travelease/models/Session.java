@@ -44,4 +44,6 @@ public class Session {
 		return "Session [userId=" + userId + ", userType=" + userType + ", timeStamp=" + timeStamp + ", sessionKey="
 				+ sessionKey + "]";
 	}
+	
+	
 }
