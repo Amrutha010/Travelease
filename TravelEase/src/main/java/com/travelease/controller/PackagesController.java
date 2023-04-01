@@ -41,8 +41,7 @@ public class PackagesController {
 		Session session = sessionService.getASessionByKey(sessionKey);
 		if(session.getUserType()==UserType.ADMIN) {
 		Packages pk= ps.createPackage(pkgs);
-		return new ResponseEntity<>(pkgs,HttpStatus.CREATED);
-		}throw new LoginException("Please login with the correct credentials");
+
 	}
 	
 	@GetMapping("/PackageById/{id}")
