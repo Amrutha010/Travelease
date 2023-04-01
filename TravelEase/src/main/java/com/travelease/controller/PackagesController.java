@@ -48,7 +48,7 @@ public class PackagesController {
 	@GetMapping("/PackageById/{id}")
 	public ResponseEntity<Packages> getPackagesbyId(@PathVariable("id") Integer Id,@RequestParam("sessionKey")String sessionKey) throws PackagesException, SessionException, LoginException {
 		Session session = sessionService.getASessionByKey(sessionKey);
-		if(session.getUserType()==UserType.ADMIN) {
+		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
 		Packages pk = ps.getPackageById(Id);
 		return new ResponseEntity<>(pk,HttpStatus.FOUND);
 		}throw new LoginException("Please login with the correct credentials");
@@ -67,7 +67,7 @@ public class PackagesController {
 	@GetMapping("/Packages")
 	public ResponseEntity<List<Packages>> viewAllPackages(@PathVariable("id") Integer id,@RequestParam("sessionKey")String sessionKey) throws SessionException, LoginException  {
 		Session session = sessionService.getASessionByKey(sessionKey);
-		if(session.getUserType()==UserType.ADMIN) {
+		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
 		List<Packages>pgs= ps.AllPackages(id);
 		
 		return new ResponseEntity<>(pgs,HttpStatus.FOUND);

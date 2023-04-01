@@ -58,7 +58,7 @@ public class HotelController {
 	@GetMapping("/AllHotels")
 	public ResponseEntity<List<Hotel>> viewAllHotels(@RequestParam("sessionKey")String sessionKey) throws HotelException, SessionException, LoginException{
 		Session session = sessionService.getASessionByKey(sessionKey);
-		if(session.getUserType()==UserType.ADMIN) {
+		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
 		List<Hotel> list = hs.AllHotels();
 		return new ResponseEntity<>(list,HttpStatus.OK);
 		}throw new LoginException("Please login with the correct credentials");

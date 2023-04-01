@@ -47,7 +47,7 @@ public class RouteController {
 	@GetMapping("/routes")
 	public ResponseEntity<List<Route>> getAllTravels(@RequestParam("sessionKey")String sessionKey) throws RouteNotFoundException, LoginException, SessionException{
 		Session session = sessionService.getASessionByKey(sessionKey);
-		if(session.getUserType()==UserType.ADMIN) {
+		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
 		List<Route> routeList = routeService.viewRoute();
 		
 		return new ResponseEntity<List<Route>>(routeList, HttpStatus.OK);
@@ -59,7 +59,7 @@ public class RouteController {
 	@GetMapping("/route/{id}")
 	public ResponseEntity<Route> findTravelsById(@PathVariable Integer id,@RequestParam("sessionKey")String sessionKey) throws RouteNotFoundException, LoginException, SessionException{
 		Session session = sessionService.getASessionByKey(sessionKey);
-		if(session.getUserType()==UserType.ADMIN) {
+		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
 		Route gotRoute = routeService.searchRoute(id);
 		
 		return new ResponseEntity<Route>(gotRoute, HttpStatus.OK);

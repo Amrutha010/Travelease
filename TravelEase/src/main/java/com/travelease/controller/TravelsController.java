@@ -50,7 +50,7 @@ public class TravelsController {
 	@GetMapping("/travels")
 	public ResponseEntity<List<Travels>> getAllTravels(@RequestParam("sessionKey")String sessionKey) throws TravelsNotFoundException, LoginException, SessionException{
 		Session session = sessionService.getASessionByKey(sessionKey);
-		if(session.getUserType()==UserType.ADMIN) {
+		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
 		List<Travels> travelsList = travelsService.viewTravels();
 		
 		return new ResponseEntity<List<Travels>>(travelsList, HttpStatus.OK);
@@ -74,7 +74,7 @@ public class TravelsController {
 	@DeleteMapping("/travels/{id}")
 	public ResponseEntity<Travels> deletTravelsById(@PathVariable Integer id,@RequestParam("sessionKey")String sessionKey) throws TravelsNotFoundException, LoginException, SessionException{
 		Session session = sessionService.getASessionByKey(sessionKey);
-		if(session.getUserType()==UserType.ADMIN) {
+		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
 		Travels gotTravel = travelsService.removeTravel(id);
 		
 		return new ResponseEntity<Travels>(gotTravel, HttpStatus.OK);
