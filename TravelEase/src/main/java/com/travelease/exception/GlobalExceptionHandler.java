@@ -28,6 +28,7 @@ public class GlobalExceptionHandler {
 	
 	
 	
+	
 	@ExceptionHandler(HotelException.class)
 	public ResponseEntity<ExceptionDTO> tutorialExceptionHandler(HotelException e, WebRequest wr){
 		
