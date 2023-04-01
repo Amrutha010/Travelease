@@ -7,7 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 
@@ -19,25 +22,34 @@ public class Packages {
 	private Integer packageId;
 
 	@NotNull
+	@Pattern(regexp = "^[A-Za-z]$")
+	@Size(min = 4,message = "Package Name sholud be more than 4 letters and Alphabest")
+	
 	private String packageName;
 
 	@NotNull
 	private String packageDescription;
 	
-//	private Integer routeId;
+	@NotNull
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "routeId")
+	private Route routeId;
 	
 	@NotNull
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "hotel_Id")
+	@JoinColumn(name = "hotelId")
 	private Hotel hotel;
 	
-//	private Bus bus;
+	@NotNull
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "busId")
+	private Bus bus;
 	
 	
 	@NotNull
+	@Min(value=5000)
 	private Double packageCost;
-	
-//	private PaymentDetails payment ;
+
 
 	public Integer getPackageId() {
 		return packageId;
@@ -63,12 +75,28 @@ public class Packages {
 		this.packageDescription = packageDescription;
 	}
 
+	public Route getRouteId() {
+		return routeId;
+	}
+
+	public void setRouteId(Route routeId) {
+		this.routeId = routeId;
+	}
+
 	public Hotel getHotel() {
 		return hotel;
 	}
 
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
+	}
+
+	public Bus getBus() {
+		return bus;
+	}
+
+	public void setBus(Bus bus) {
+		this.bus = bus;
 	}
 
 	public Double getPackageCost() {
@@ -79,30 +107,20 @@ public class Packages {
 		this.packageCost = packageCost;
 	}
 
-//	public PaymentDetails getPayment() {
-//		return payment;
-//	}
-//
-//	public void setPayment(PaymentDetails payment) {
-//		this.payment = payment;
-//	}
+	
 
 	public Packages(Integer packageId, @NotNull String packageName, @NotNull String packageDescription,
-			@NotNull Hotel hotel, @NotNull Double packageCost) {
+			@NotNull Route routeId, @NotNull Hotel hotel, @NotNull Bus bus, @NotNull @Min(5000) Double packageCost,
+			Integer getHotelId) {
 		super();
 		this.packageId = packageId;
 		this.packageName = packageName;
 		this.packageDescription = packageDescription;
+		this.routeId = routeId;
 		this.hotel = hotel;
+		this.bus = bus;
 		this.packageCost = packageCost;
-		//this.payment = payment;
-	}
-
-	@Override
-	public String toString() {
-		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
-				+ packageDescription + ", hotel=" + hotel + ", packageCost=" + packageCost + ", payment=" 
-				+ "]";
+	
 	}
 
 	public Packages() {
@@ -111,6 +129,20 @@ public class Packages {
 	}
 
 	
+
+	@Override
+	public String toString() {
+		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
+				+ packageDescription + ", routeId=" + routeId + ", hotel=" + hotel + ", bus=" + bus + ", packageCost="
+				+ packageCost + "]";
+	}
+
+	public Integer getHotelId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 	
 }

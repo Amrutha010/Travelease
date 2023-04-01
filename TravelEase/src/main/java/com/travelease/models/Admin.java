@@ -19,6 +19,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 public class Admin {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull

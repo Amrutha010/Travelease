@@ -33,19 +33,17 @@ public class Bus {
 	private Integer capacity;
 	
 	
-	// relationship variables , getter/Setters/Conrtuctor are yet be injected
+
 
 	//relations part starting
 	
 	@JsonIgnore
 	@ManyToOne
-	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "Route_Id")
 	private Route route;
 	
 	@JsonIgnore
 	@ManyToOne
-//	@Cascade(CascadeType.ALL)
 	@JoinColumn(name = "Travels_Id")
 	private Travels travels;
 	

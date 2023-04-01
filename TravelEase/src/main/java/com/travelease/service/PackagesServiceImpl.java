@@ -7,51 +7,96 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.travelease.Exceptions.PackagesException;
+import com.travelease.exception.BusNotFoundException;
+import com.travelease.exception.HotelException;
+import com.travelease.exception.PackagesException;
+import com.travelease.exception.RouteNotFoundException;
+import com.travelease.models.Bus;
+import com.travelease.models.Hotel;
 import com.travelease.models.Packages;
+import com.travelease.models.Route;
+import com.travelease.repository.BusRepository;
 import com.travelease.repository.HotelDAO;
 import com.travelease.repository.PackagesDAO;
+import com.travelease.repository.RouteRepository;
 
 
 @Service
 public class PackagesServiceImpl implements PackagesService {
 
 	@Autowired
-	private PackagesDAO packageDAO;
+	private PackagesDAO packRepo;
 	
-//	@Autowired
-//	private HotelDAO hotelDAO;
+	@Autowired
+	private HotelDAO hotelRepo;
+	
+	@Autowired
+	private BusRepository busRepo;
+	
+	@Autowired
+	private RouteRepository routeRepo;
+	
+	
+
 
 	@Override
-	public Packages createPackage(Packages pgs) {
-		return packageDAO.save(pgs);
+	public Packages createPackage(Packages pgs) throws HotelException, RouteNotFoundException, BusNotFoundException {
+		Packages pkg = new Packages();
 		
+		pkg.setPackageId(pgs.getPackageId());
+		pkg.setPackageName(pgs.getPackageName());
+		pkg.setPackageCost(pgs.getPackageCost());
+		pkg.setPackageId(pgs.getPackageId());
+		pkg.setPackageDescription(pgs.getPackageDescription());
+		
+		Hotel hotel= hotelRepo.findById(pgs.getHotelId())
+				.orElseThrow(() -> new HotelException("Hotel Not Found With HotelID : " + pgs.getHotelId()));
+
+		Route route = routeRepo.findById(pgs.getRouteId().getRouteId())
+				.orElseThrow(() -> new RouteNotFoundException("Route Not Found With Route ID : " + pgs.getRouteId().getRouteId()));
+
+		
+		Bus bus = busRepo.findById(pgs.getBus().getBusID())
+				.orElseThrow(() -> new BusNotFoundException("Bus Not Found With Bus ID : "+ pgs.getBus().getBusID()));
+		pkg.setHotel(hotel);
+		pkg.setRouteId(route);
+		pkg.setBus(bus);
+		
+		Packages newPkg= packRepo.save(pkg);
+		
+		hotelRepo.save(hotel);
+		routeRepo.save(route);
+		busRepo.save(bus);
+		
+		return newPkg;
 	}
 
 	@Override
 	public List<Packages> AllPackages(Integer id) {
-		return packageDAO.findAll();
+		return packRepo.findAll();
 	}
 
 	@Override
 	public Packages getPackageById(Integer id) throws PackagesException {
-		return packageDAO.findById(id).get();
+		return packRepo.findById(id)
+				.orElseThrow(() -> new PackagesException("Package is not available :" + id +" not found"));
+
 	}
 
 	@Override
 	public Packages deletePackageById(Integer id) throws PackagesException {
-		Packages p = packageDAO.findById(id).orElseThrow(() -> new PackagesException("Package is not available :" + id));
+		Packages p = packRepo.findById(id).orElseThrow(() -> new PackagesException("Package is not available :" + id+" not found"));
 		
-		if (p != null) {
-			packageDAO.delete(p);
-		}
+		
+			packRepo.delete(p);
+		
 		return p;
 	}
 
 	@Override
 	public Packages updatePackages(Packages p) {
 
-		packageDAO.save(p);
+		packRepo.save(p);
 		return null;
 	}
 

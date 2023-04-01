@@ -37,7 +37,7 @@ public class Travels {
 	
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "travels")
+	@OneToMany(mappedBy = "travels")
 	private List<Bus> bus = new ArrayList<>();
 	
 	

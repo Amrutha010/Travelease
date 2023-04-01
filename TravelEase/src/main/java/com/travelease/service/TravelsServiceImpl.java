@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.travelease.exception.TravelsNotFoundException;
+import com.travelease.models.Bus;
 import com.travelease.models.Travels;
+import com.travelease.repository.BusRepository;
 import com.travelease.repository.TravelsRepository;
 
 
@@ -17,6 +19,9 @@ public class TravelsServiceImpl implements TravelsService{
 	
 	@Autowired
 	TravelsRepository travelRepository;
+	
+	@Autowired
+	BusRepository busRepository;
 	
 	
 	
@@ -58,12 +63,15 @@ public class TravelsServiceImpl implements TravelsService{
 			throw new TravelsNotFoundException("No travles found with enterd id");
 		}
 		
-		//setting travels null to each associated bus
+		//All the associated buses will be released and not deleted
+		
 		searchedTravels.get().getBus().stream().forEach(s->{
 			s.setTravels(null);
 		});
 		
+		
 		travelRepository.delete(searchedTravels.get());
+		
 		
 		return searchedTravels.get();
 		
