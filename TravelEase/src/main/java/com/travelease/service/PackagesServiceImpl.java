@@ -92,7 +92,7 @@ public class PackagesServiceImpl implements PackagesService {
 	}
 
 	@Override
-	public List<Packages> AllPackages(Integer id) {
+	public List<Packages> AllPackages() {
 		return packRepo.findAll();
 	}
 
