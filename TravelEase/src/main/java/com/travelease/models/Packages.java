@@ -39,29 +39,31 @@ public class Packages {
 	
 	
 	
-	@ManyToOne
-	@JoinColumn(name = "busId")
-	private Bus bus;
+//	@OneToMany
+//	@JoinColumn(name = "busId")
+//	private Bus bus;
 	
-//	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-//	@OneToMany(mappedBy = "Packages")
-//	private List<Bus> bus = new ArrayList<>();
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@OneToMany
+	private List<Bus> bus = new ArrayList<>();
 	
-	@ManyToOne
-	@JoinColumn(name = "routeId")
-	private Route route;
-	
-	
-//	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-//	@OneToMany(mappedBy = "Packages")
-//	private List<Route> route = new ArrayList<>();
+//	@OneToMany
+//	@JoinColumn(name = "routeId")
+//	private Route route;
 	
 	
-	@ManyToOne
-	@JoinColumn(name = "hotelId")
-	private Hotel hotel;
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@OneToMany
+	private List<Route> route = new ArrayList<>();
 	
 	
+//	@OneToMany
+//	@JoinColumn(name = "hotelId")
+//	private Hotel hotel;
+
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@OneToMany
+	private List<Hotel> hotel = new ArrayList<>();
 	
 	
 	@Min(value=5000)
@@ -101,32 +103,32 @@ public class Packages {
 	}
 
 
-	public Bus getBus() {
+	public List<Bus> getBus() {
 		return bus;
 	}
 
 
-	public void setBus(Bus bus) {
+	public void setBus(List<Bus> bus) {
 		this.bus = bus;
 	}
 
 
-	public Route getRoute() {
+	public List<Route> getRoute() {
 		return route;
 	}
 
 
-	public void setRoute(Route route) {
+	public void setRoute(List<Route> route) {
 		this.route = route;
 	}
 
 
-	public Hotel getHotel() {
+	public List<Hotel> getHotel() {
 		return hotel;
 	}
 
 
-	public void setHotel(Hotel hotel) {
+	public void setHotel(List<Hotel> hotel) {
 		this.hotel = hotel;
 	}
 
@@ -151,29 +153,20 @@ public class Packages {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
+				+ packageDescription + ", bus=" + bus + ", route=" + route + ", hotel=" + hotel + ", packageCost="
+				+ packageCost + ", packageRating=" + packageRating + "]";
+	}
+
+
 	public Packages() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Packages(Integer packageId,
-			@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$") @Size(min = 4, message = "Package Name sholud be more than 4 letters and Alphabest") String packageName,
-			@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$") String packageDescription, Bus bus, Route route, Hotel hotel,
-			@Min(5000) Double packageCost, Double packageRating) {
-		super();
-		this.packageId = packageId;
-		this.packageName = packageName;
-		this.packageDescription = packageDescription;
-		this.bus = bus;
-		this.route = route;
-		this.hotel = hotel;
-		this.packageCost = packageCost;
-		this.packageRating = packageRating;
-	}
-
 	
-
 	
 	
 }
