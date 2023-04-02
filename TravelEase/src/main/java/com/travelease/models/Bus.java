@@ -1,5 +1,8 @@
 package com.travelease.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -12,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,11 +36,19 @@ public class Bus {
 	@Max(value  = 34,message = "bus capacity is the 34 only")
 	private Integer capacity;
 	
-	
+	private Integer Available_seats;
 
 
 	//relations part starting
 	
+	public Integer getAvailable_seats() {
+		return Available_seats;
+	}
+
+	public void setAvailable_seats(Integer available_seats) {
+		Available_seats = available_seats;
+	}
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "Route_Id")
@@ -47,6 +59,10 @@ public class Bus {
 	@JoinColumn(name = "Travels_Id")
 	private Travels travels;
 	
+	
+	@JsonIgnore
+	@OneToMany( mappedBy = "bus")
+	private Set<TicketDetails> ticketdetails= new HashSet<>();
 	//relations part ending
 	
 	
@@ -118,6 +134,14 @@ public class Bus {
 	public String toString() {
 		return "Bus [busID=" + busID + ", busType=" + busType + ", busNumber=" + busNumber + ", capacity=" + capacity
 				+ ", route=" + route + ", travels=" + travels + "]";
+	}
+
+	public Set<TicketDetails> getTicketdetails() {
+		return ticketdetails;
+	}
+
+	public void setTicketdetails(Set<TicketDetails> ticketdetails) {
+		this.ticketdetails = ticketdetails;
 	}
 
 

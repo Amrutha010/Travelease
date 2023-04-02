@@ -26,6 +26,44 @@ public class GlobalExceptionHandler {
 		
 	}
 	
+	@ExceptionHandler(BookingException.class)
+	public ResponseEntity<ExceptionDTO> tutorialExceptionHandler(BookingException e, WebRequest wr){
+		
+		ExceptionDTO err=new ExceptionDTO();
+		err.setDateAndTime(LocalDateTime.now());
+		err.setMessage(e.getMessage());
+		err.setDesc(wr.getDescription(false));
+		
+		return new ResponseEntity<ExceptionDTO>(err, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	@ExceptionHandler(PaymentException.class)
+	public ResponseEntity<ExceptionDTO> tutorialExceptionHandler(PaymentException e, WebRequest wr){
+		
+		ExceptionDTO err=new ExceptionDTO();
+		err.setDateAndTime(LocalDateTime.now());
+		err.setMessage(e.getMessage());
+		err.setDesc(wr.getDescription(false));
+		
+		return new ResponseEntity<ExceptionDTO>(err, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	@ExceptionHandler(CustomerException.class)
+	public ResponseEntity<ExceptionDTO> tutorialExceptionHandler(CustomerException e, WebRequest wr){
+		
+		ExceptionDTO err=new ExceptionDTO();
+		err.setDateAndTime(LocalDateTime.now());
+		err.setMessage(e.getMessage());
+		err.setDesc(wr.getDescription(false));
+		
+		return new ResponseEntity<ExceptionDTO>(err, HttpStatus.BAD_REQUEST);
+		
+	}
+
+	
+	
 	
 	
 	@ExceptionHandler(HotelException.class)

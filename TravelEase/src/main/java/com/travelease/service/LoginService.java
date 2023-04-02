@@ -1,17 +1,12 @@
 package com.travelease.service;
 
-import javax.security.auth.login.LoginException;
+import com.travelease.exception.LoginException;
+import com.travelease.models.LoginDTO;
+import com.travelease.models.Session;
+import com.travelease.models.UserType;
 
-import com.travelease.models.CurrentUserSession;
-import com.travelease.models.LogIn;
 public interface LoginService {
-
-	public String logIntoAccount(LogIn dto) throws LoginException;
-
-	public String logOutFromAccount(String key) throws LoginException;
-
-	public String logInAsUser(LogIn loginDTO) throws LoginException;
-
-	public boolean isLoggedIn(String key) throws LoginException;
-
+	public Session login(LoginDTO loginDto) throws LoginException;
+	
+	public String logout(Integer userId, UserType userType)throws LoginException;
 }
