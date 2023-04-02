@@ -41,12 +41,11 @@ Online Trip Management System
     https://github.com/Amrutha010/adamant-jellyfish-2332
    
 ## Contributors  😇
-    * KARRI NAGA DURGA AMRUTHA https://github.com/Amrutha010 
-    * Arshad Ali https://github.com/Arshada6105
-    * Atul Harsh https://github.com/atulharsh22
-    * Sidra Syed https://github.com/Sayeda-5
-    * Vikas sanodiya https://github.com/vikas-011
-
+   -  [Karri Naga Durga Amrutha](https://github.com/Vivekkumar06)    
+   -  [Arshad Ali](https://github.com/Arshada6105)
+   -  [Atul Harsh](https://github.com/atulharsh22)
+   -  [Sidra Syed](https://github.com/Sayeda-5)
+   -  [Vikas Sanodiya](https://github.com/vikas-0110)
 
 ## Screenshots  📸
 
