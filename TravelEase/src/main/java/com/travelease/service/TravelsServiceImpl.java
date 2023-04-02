@@ -67,6 +67,7 @@ public class TravelsServiceImpl implements TravelsService{
 		
 		searchedTravels.get().getBus().stream().forEach(s->{
 			s.setTravels(null);
+			s.setRoute(null);
 		});
 		
 		
