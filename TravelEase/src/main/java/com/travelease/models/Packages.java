@@ -53,8 +53,8 @@ public class Packages {
 	
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToMany
-	private List<Route> route = new ArrayList<>();
+	@OneToOne
+	private Route route;
 	
 	
 //	@OneToMany
@@ -113,17 +113,14 @@ public class Packages {
 	}
 
 
-	public List<Route> getRoute() {
+	public Route getRoute() {
 		return route;
 	}
 
 
-	public void setRoute(List<Route> route) {
+	public void setRoute(Route route) {
 		this.route = route;
 	}
-
-
-	
 
 
 	public Hotel getHotel() {
@@ -156,19 +153,10 @@ public class Packages {
 	}
 
 
-	
-
-
-	public Packages() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
 	public Packages(Integer packageId,
 			@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$") @Size(min = 4, message = "Package Name sholud be more than 4 letters and Alphabest") String packageName,
-			@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$") String packageDescription, Bus bus, List<Route> route,
-			Hotel hotel, @Min(5000) Double packageCost, Double packageRating) {
+			@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$") String packageDescription, Bus bus, Route route, Hotel hotel,
+			@Min(5000) Double packageCost, Double packageRating) {
 		super();
 		this.packageId = packageId;
 		this.packageName = packageName;
@@ -181,6 +169,12 @@ public class Packages {
 	}
 
 
+	public Packages() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	@Override
 	public String toString() {
 		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
@@ -189,6 +183,7 @@ public class Packages {
 	}
 
 
+	
 	
 	
 	
