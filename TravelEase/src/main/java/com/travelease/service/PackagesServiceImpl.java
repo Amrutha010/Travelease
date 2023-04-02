@@ -42,9 +42,6 @@ public class PackagesServiceImpl implements PackagesService {
 	@Override
 	public Packages createPackage(Packages pgs) throws HotelException, RouteNotFoundException, BusNotFoundException {
 		Packages pkg = packRepo.save(pgs);
-		
-		
-		
 		return pkg;
 	}
 

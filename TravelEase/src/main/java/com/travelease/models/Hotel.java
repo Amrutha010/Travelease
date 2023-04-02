@@ -45,9 +45,7 @@ public class Hotel {
 
 	
 
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToMany( mappedBy = "hotel" )
-	private List<Packages> packages = new ArrayList<>();
+	
 
 
 
@@ -61,7 +59,7 @@ public class Hotel {
 	public Hotel(Integer hotelId, @Pattern(regexp = "^[A-Za-z\\s]+$") String hotelName,
 			@Pattern(regexp = "^[A-Za-z\\s]+$") String hotelType,
 			@Pattern(regexp = "^[A-Za-z\\s]+$") String hotelDescription, HotelAddress hotelAddress,
-			@Min(1000) Double rent, String status, List<Packages> packages) {
+			@Min(1000) Double rent, String status) {
 		super();
 		this.hotelId = hotelId;
 		this.hotelName = hotelName;
@@ -70,7 +68,7 @@ public class Hotel {
 		this.hotelAddress = hotelAddress;
 		Rent = rent;
 		Status = status;
-		this.packages = packages;
+		
 	}
 
 
@@ -159,16 +157,6 @@ public class Hotel {
 
 
 
-	public List<Packages> getPackages() {
-		return packages;
-	}
-
-
-
-	public void setPackages(List<Packages> packages) {
-		this.packages = packages;
-	}
-	
 	
 	
 	
