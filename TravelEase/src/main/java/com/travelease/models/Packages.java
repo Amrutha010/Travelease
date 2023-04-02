@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -44,8 +45,8 @@ public class Packages {
 //	private Bus bus;
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToMany
-	private List<Bus> bus = new ArrayList<>();
+	@OneToOne
+	private Bus bus;
 	
 //	@OneToMany
 //	@JoinColumn(name = "routeId")
@@ -53,8 +54,8 @@ public class Packages {
 	
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToMany
-	private List<Route> route = new ArrayList<>();
+	@OneToOne
+	private Route route;
 	
 	
 //	@OneToMany
@@ -62,8 +63,8 @@ public class Packages {
 //	private Hotel hotel;
 
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToMany
-	private List<Hotel> hotel = new ArrayList<>();
+	@OneToOne
+	private Hotel hotel;
 	
 	
 	@Min(value=5000)
@@ -103,32 +104,32 @@ public class Packages {
 	}
 
 
-	public List<Bus> getBus() {
+	public Bus getBus() {
 		return bus;
 	}
 
 
-	public void setBus(List<Bus> bus) {
+	public void setBus(Bus bus) {
 		this.bus = bus;
 	}
 
 
-	public List<Route> getRoute() {
+	public Route getRoute() {
 		return route;
 	}
 
 
-	public void setRoute(List<Route> route) {
+	public void setRoute(Route route) {
 		this.route = route;
 	}
 
 
-	public List<Hotel> getHotel() {
+	public Hotel getHotel() {
 		return hotel;
 	}
 
 
-	public void setHotel(List<Hotel> hotel) {
+	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
 
@@ -153,11 +154,19 @@ public class Packages {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
-				+ packageDescription + ", bus=" + bus + ", route=" + route + ", hotel=" + hotel + ", packageCost="
-				+ packageCost + ", packageRating=" + packageRating + "]";
+	public Packages(Integer packageId,
+			@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$") @Size(min = 4, message = "Package Name sholud be more than 4 letters and Alphabest") String packageName,
+			@Pattern(regexp = "^[A-Za-z]+ [A-Za-z]+$") String packageDescription, Bus bus, Route route, Hotel hotel,
+			@Min(5000) Double packageCost, Double packageRating) {
+		super();
+		this.packageId = packageId;
+		this.packageName = packageName;
+		this.packageDescription = packageDescription;
+		this.bus = bus;
+		this.route = route;
+		this.hotel = hotel;
+		this.packageCost = packageCost;
+		this.packageRating = packageRating;
 	}
 
 
@@ -166,6 +175,17 @@ public class Packages {
 		// TODO Auto-generated constructor stub
 	}
 
+
+	@Override
+	public String toString() {
+		return "Packages [packageId=" + packageId + ", packageName=" + packageName + ", packageDescription="
+				+ packageDescription + ", bus=" + bus + ", route=" + route + ", hotel=" + hotel + ", packageCost="
+				+ packageCost + ", packageRating=" + packageRating + "]";
+	}
+
+
+	
+	
 	
 	
 	
