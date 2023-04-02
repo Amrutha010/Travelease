@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,29 +30,62 @@ public class PackagesController {
 	private PackagesService ps;
 	
 	@PostMapping("/Packages")
-	public ResponseEntity<Packages> createPackages(@Valid @RequestBody Packages pkgs ) throws PackagesException, BusNotFoundException, RouteNotFoundException, HotelException{
+	public ResponseEntity<Packages> createPackages(@Valid @RequestBody Packages pkgs,@RequestParam("sessionKey")String sessionKey) throws PackagesException, BusNotFoundException, RouteNotFoundException, HotelException, SessionException, LoginException{
+		Session session = sessionService.getASessionByKey(sessionKey);
+		if(session.getUserType()==UserType.ADMIN) {
+			
 		Packages pk= ps.createPackage(pkgs);
-		return new ResponseEntity<>(pk,HttpStatus.CREATED);
+		
+		return new ResponseEntity<>(pkgs,HttpStatus.CREATED);
 	}
+	throw new LoginException("Please login with the correct credentials");
+}
+	
 	
 	@GetMapping("/PackageById/{id}")
-	public ResponseEntity<Packages> getPackagesbyId(@PathVariable("id") Integer Id) throws PackagesException {
+
+	public ResponseEntity<Packages> getPackagesbyId(@PathVariable("id") Integer Id,@RequestParam("sessionKey")String sessionKey) throws PackagesException, SessionException, LoginException {
+		Session session = sessionService.getASessionByKey(sessionKey);
+		
+		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
+		
+
 		Packages pk = ps.getPackageById(Id);
+		
 		return new ResponseEntity<>(pk,HttpStatus.FOUND);
+
 	}
 	
+
+	
 	@DeleteMapping("/Package/{id}")
-	public ResponseEntity<Packages> deletePackage(@PathVariable("id") Integer Id ) throws PackagesException{
+	public ResponseEntity<Packages> deletePackage(@PathVariable("id") Integer Id ,@RequestParam("sessionKey")String sessionKey) throws PackagesException, SessionException, LoginException{
+		Session session = sessionService.getASessionByKey(sessionKey);
+		
+		if(session.getUserType()==UserType.ADMIN) {
+
 		Packages pk =  ps.deletePackageById(Id);
+		
 		return new ResponseEntity<>(pk,HttpStatus.ACCEPTED);
+
+		}
+		throw new LoginException("Please login with the correct credentials");
+
 		
 	}
 	
 	@GetMapping("/Packages")
-	public ResponseEntity<List<Packages>> viewAllPackages(@PathVariable("id") Integer id)  {
+	public ResponseEntity<List<Packages>> viewAllPackages(@PathVariable("id") Integer id,@RequestParam("sessionKey")String sessionKey) throws SessionException, LoginException  {
+		Session session = sessionService.getASessionByKey(sessionKey);
+		
+		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
+			
 		List<Packages>pgs= ps.AllPackages(id);
 		
 		return new ResponseEntity<>(pgs,HttpStatus.FOUND);
+		}
+		throw new LoginException("Please login with the correct credentials");
+
 		
 	}
 	
