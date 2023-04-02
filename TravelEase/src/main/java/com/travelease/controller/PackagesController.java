@@ -19,6 +19,7 @@ import com.travelease.exception.LoginException;
 import com.travelease.exception.PackagesException;
 import com.travelease.exception.RouteNotFoundException;
 import com.travelease.exception.SessionException;
+import com.travelease.models.Hotel;
 import com.travelease.models.Packages;
 import com.travelease.models.Session;
 import com.travelease.models.UserType;
@@ -84,12 +85,12 @@ public class PackagesController {
 	}
 	
 	@GetMapping("/Packages")
-	public ResponseEntity<List<Packages>> viewAllPackages(@PathVariable("id") Integer id,@RequestParam("sessionKey")String sessionKey) throws SessionException, LoginException  {
+	public ResponseEntity<List<Packages>> viewAllPackages(@RequestParam("sessionKey")String sessionKey) throws SessionException, LoginException  {
 		Session session = sessionService.getASessionByKey(sessionKey);
 		
 		if(session.getUserType()==UserType.ADMIN||session.getUserType()==UserType.CUSTOMER) {
 			
-		List<Packages>pgs= ps.AllPackages(id);
+		List<Packages>pgs= ps.AllPackages();
 		
 		return new ResponseEntity<>(pgs,HttpStatus.FOUND);
 		}
