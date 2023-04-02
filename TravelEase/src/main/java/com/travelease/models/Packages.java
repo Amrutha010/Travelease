@@ -10,7 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -45,7 +44,7 @@ public class Packages {
 //	private Bus bus;
 	
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToOne
+	@ManyToOne
 	private Bus bus;
 	
 //	@OneToMany
@@ -63,7 +62,7 @@ public class Packages {
 //	private Hotel hotel;
 
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@OneToOne
+	@ManyToOne
 	private Hotel hotel;
 	
 	

@@ -10,6 +10,7 @@ import com.travelease.models.Route;
 
 @Repository
 public interface RouteRepository extends JpaRepository<Route, Integer>{
-
+	
+	
 	
 }

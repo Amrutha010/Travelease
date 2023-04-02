@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.travelease.exception.BookingException;
 import com.travelease.exception.BusNotFoundException;
 import com.travelease.exception.HotelException;
 import com.travelease.exception.PackagesException;
@@ -42,7 +43,6 @@ public class PackagesServiceImpl implements PackagesService {
 	@Override
 	public Packages createPackage(Packages pgs) throws HotelException, RouteNotFoundException, BusNotFoundException {
 		Packages pkg = packRepo.save(pgs);
-
 		return pkg;
 	}
 
