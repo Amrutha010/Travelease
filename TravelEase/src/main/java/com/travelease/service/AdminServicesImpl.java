@@ -30,13 +30,11 @@ public class AdminServicesImpl implements AdminServices{
 
 	@Override
 	public Admin getAdminById(Integer adminID) throws AdminException {
-		// TODO Auto-generated method stub
 		return aDao.findById(adminID).orElseThrow(() -> new AdminException("No Admin found with that Id:- "+adminID));
 	}
 
 	@Override
 	public Admin deleteAdminById(Integer adminID)throws AdminException{
-		// TODO Auto-generated method stub
 		Admin admin = aDao.findById(adminID).orElseThrow(() -> new AdminException("No Admin found with that Id:- "+adminID));
 		aDao.delete(admin);
 		return admin;
@@ -44,7 +42,6 @@ public class AdminServicesImpl implements AdminServices{
 
 	@Override
 	public Admin updateAdmin(Admin admin) throws AdminException {
-		// TODO Auto-generated method stub
 		aDao.findById(admin.getAdminID()).orElseThrow(()-> new AdminException("No Admin found with the Id:-"+admin.getAdminID()));
 		return aDao.save(admin);
 	}

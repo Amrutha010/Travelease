@@ -46,7 +46,7 @@ public class FeedbackServicesImpl implements FeedbackServices{
 		List<Feedback> feedbacks= findFeedbackByPackageId(p.getPackageId());
 		double sum=0;
 		for (Feedback feedback21 : feedbacks) {
-			sum+=feedback21.getRating();
+			sum+=feedback21.getRating(); 
 		}
 		double avg =sum/feedbacks.size();
 		
