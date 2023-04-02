@@ -44,10 +44,8 @@ public class PaymentServiceImpl implements PaymentService{
 
 		Payment newPayment = new Payment();
 
-		String correctUpiId = currentBooking.getCustomer().getCustomerName() +"@upi";
 		
-		if (paymentDTO.getUpi_Id().equals(correctUpiId) && paymentDTO.getPin() == 123456
-				&& currentBooking.getBookingStatus() == BookingStatus.PAYMENT_PENDING
+		if (currentBooking.getBookingStatus() == BookingStatus.PAYMENT_PENDING
 				&& currentBooking.getCustomer().getCustomerId() == session.getUserId()) {
 
 			newPayment.setBooking(currentBooking);
