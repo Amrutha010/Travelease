@@ -14,7 +14,7 @@ public interface PackagesService {
 	
 	public Packages createPackage(Packages pgs  ,Integer busId , Integer hotelId , Integer routeId) throws BusNotFoundException, RouteNotFoundException, HotelException;
 	
-	public List<Packages> AllPackages(Integer id);
+	public List<Packages> AllPackages();
 	
 	public Packages getPackageById(Integer id) throws PackagesException;
 	
