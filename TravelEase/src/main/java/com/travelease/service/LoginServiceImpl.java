@@ -88,7 +88,6 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public String logout(Integer userId, UserType userType) throws LoginException {
-		// TODO Auto-generated method stub
 		Session session = sDao.findByUserIdAndUserType(userId, userType);
 		
 		if(session == null)
