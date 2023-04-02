@@ -39,11 +39,11 @@ public class PackagesController {
 	private SessionServices sessionService;
 	
 	@PostMapping("/Packages")
-	public ResponseEntity<Packages> createPackages(@Valid @RequestBody Packages pkgs,@RequestParam("sessionKey")String sessionKey) throws PackagesException, BusNotFoundException, RouteNotFoundException, HotelException, SessionException, LoginException{
+	public ResponseEntity<Packages> createPackages(@Valid @RequestBody Packages pkgs,@RequestParam("sessionKey")String sessionKey , @RequestParam Integer busId , @RequestParam Integer hotelId , @RequestParam Integer routeId) throws PackagesException, BusNotFoundException, RouteNotFoundException, HotelException, SessionException, LoginException{
 		Session session = sessionService.getASessionByKey(sessionKey);
 		if(session.getUserType()==UserType.ADMIN) {
 			
-		Packages pk= ps.createPackage(pkgs);
+		Packages pk= ps.createPackage(pkgs,busId,hotelId,routeId);
 		
 		return new ResponseEntity<>(pk,HttpStatus.CREATED);
 	}
