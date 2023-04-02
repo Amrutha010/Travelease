@@ -13,7 +13,7 @@ public class AdminServicesImpl implements AdminServices{
 	@Autowired
 	private AdminDAO aDao;
 	
-	private EncryptService encrypt=new EncryptServiceImpl();
+	//private EncryptService encrypt=new EncryptServiceImpl();
 	
 	@Override
 	public Admin addAdmin(Admin admin) throws AdminException {
@@ -22,8 +22,8 @@ public class AdminServicesImpl implements AdminServices{
 		if(aDao.findByEmail(admin.getEmail()) != null)
 				throw new AdminException("Admin already present with that email id");
         
-        	String admin1= encrypt.EncryptPassword(admin.getPassword());
-        	admin.setPassword(admin1);
+        	//String admin1= encrypt.EncryptPassword(admin.getPassword());
+        	//admin.setPassword(admin1);
 		     return aDao.save(admin);	
 
 	}

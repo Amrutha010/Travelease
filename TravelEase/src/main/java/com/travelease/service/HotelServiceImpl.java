@@ -20,7 +20,11 @@ public class HotelServiceImpl implements HotelService {
 	@Override
 	public Hotel createHotel(Hotel hotel) {
 	
+		
+//		System.out.println(hotel);
+		
 		Hotel h= hotelDAO.save(hotel);
+		
 		return h;
 	}
 
