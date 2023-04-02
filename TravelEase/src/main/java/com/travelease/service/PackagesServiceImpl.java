@@ -40,40 +40,55 @@ public class PackagesServiceImpl implements PackagesService {
 
 
 	@Override
-	public Packages createPackage(Packages pgs) throws HotelException, RouteNotFoundException, BusNotFoundException {
-		
-
-		Packages pkg = new Packages();
-
-		
-		pkg.setPackageName(pgs.getPackageName());
-		
-		pkg.setPackageCost(pgs.getPackageCost());
-		
-		pkg.setPackageDescription(pgs.getPackageDescription());
-
+	public Packages createPackage(Packages pgs , Integer busId , Integer hotelId , Integer routeId) throws HotelException, RouteNotFoundException, BusNotFoundException {
 		
 		
-		System.out.println(pgs);
-		Hotel h = hotelRepo.findById(pgs.getHotel().getHotelId())
-				.orElseThrow(() -> new HotelException("Hotel Not Found With HotelID : " + pgs.getHotel().getHotelId()));
-	
-
-		Bus b = busRepo.findById(pgs.getBus().getBusID())
-				.orElseThrow(() -> new BusNotFoundException("Bust Not Found With Bus ID : " + pgs.getBus().getBusID()));
-
-
-		Route r = routeRepo.findById(pgs.getRoute().getRouteId())
-				.orElseThrow(() -> new RouteNotFoundException("Route Not Found With Route ID : " + pgs.getRoute().getRouteId()));
-
+		Optional<Bus> bus = busRepo.findById(busId);
+		
+		pgs.setBus(bus.get());
 		
 		
-		pkg.setRoute(r);
-		pkg.setHotel(h);
-		pkg.setBus(b);
+		Optional<Route> route = routeRepo.findById(routeId);
+		
+		pgs.setRoute(route.get());
+		
+		Optional<Hotel> hotel = hotelRepo.findById(hotelId);
+		
+		pgs.setHotel(hotel.get());
+		
+		packRepo.save(pgs);
+		
 
-		Packages newPackage = packRepo.save(pkg);
-		return pkg;
+//		Packages pkg = new Packages();
+//
+//		
+//		pkg.setPackageName(pgs.getPackageName());
+//		
+//		pkg.setPackageCost(pgs.getPackageCost());
+//		
+//		pkg.setPackageDescription(pgs.getPackageDescription());
+//
+//		
+//		
+//		Hotel h = hotelRepo.findById(pgs.getHotel().getHotelId())
+//				.orElseThrow(() -> new HotelException("Hotel Not Found With HotelID : " + pgs.getHotel().getHotelId()));
+//	
+//
+//		Bus b = busRepo.findById(pgs.getBus().getBusID())
+//				.orElseThrow(() -> new BusNotFoundException("Bust Not Found With Bus ID : " + pgs.getBus().getBusID()));
+//
+//
+//		Route r = routeRepo.findById(pgs.getRoute().getRouteId())
+//				.orElseThrow(() -> new RouteNotFoundException("Route Not Found With Route ID : " + pgs.getRoute().getRouteId()));
+//
+//		
+//		
+//		pkg.setRoute(r);
+//		pkg.setHotel(h);
+//		pkg.setBus(b);
+//
+//		Packages newPackage = packRepo.save(pkg);
+		return pgs;
 	}
 
 	@Override

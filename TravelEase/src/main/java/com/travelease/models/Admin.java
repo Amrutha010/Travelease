@@ -3,6 +3,7 @@ package com.travelease.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -14,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -34,14 +36,12 @@ public class Admin {
 	@Email
 	private String email;
 	
-	@NotNull
+	
 	@NotBlank
-//	@Size(min = 8, max = 15, message = "Password should be minimum 8 and maximum 15 characters long")
 	private String password;
 	
-	@NotNull
-	@NotBlank
-	@Size(min = 10, max = 10, message = "Mobile numbers should be 10 digit long")
+	
+	@Pattern(regexp = "(^$|[0-9]){10}")
 	private String mobile;
 
 	@OneToMany(mappedBy = "admin" ,cascade = CascadeType.ALL)
