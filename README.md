@@ -41,11 +41,11 @@ Online Trip Management System
     https://github.com/Amrutha010/adamant-jellyfish-2332
    
 ## Contributors  😇
-    * KARRI NAGA DURGA AMRUTHA
-    * Arshad Ali
-    * Atul Harsh
-    * Sidra Syed
-    * Vikas sanodiya
+    * <a href="https://github.com/Amrutha010" target="blank">KARRI NAGA DURGA AMRUTHA</a> **https://github.com/Amrutha010**
+    * Arshad Ali **https://github.com/Arshada6105**
+    * Atul Harsh **https://github.com/atulharsh22**
+    * Sidra Syed **https://github.com/Sayeda-5**
+    * Vikas sanodiya **https://github.com/vikas-011**
 
 
 ## Screenshots  📸
@@ -69,12 +69,25 @@ Online Trip Management System
 
 <img src="https://github.com/Shibshankar01/-quizzical-drink-5030/blob/main/TravelZilla/controller-screenshots/login-logout-controller.png" alt="booking-controller" />
 
+#### Travel Controller 
 
+<img src="https://github.com/Amrutha010/adamant-jellyfish-2332/blob/main/TravelEase/Controller-Screenshort/Travel.jpg" />
 
+#### Bus Controller 
+
+<img src="https://github.com/Amrutha010/adamant-jellyfish-2332/blob/main/TravelEase/Controller-Screenshort/Bus.jpg" />
+
+#### Route Controller 
+
+<img src="https://github.com/Amrutha010/adamant-jellyfish-2332/blob/main/TravelEase/Controller-Screenshort/route.jpg" />
+
+#### Hotel Controller 
+
+<img src="https://github.com/Amrutha010/adamant-jellyfish-2332/blob/main/TravelEase/Controller-Screenshort/hotel.jpg" />
 
 #### Package Controller 
 
-<img src="https://github.com/Shibshankar01/-quizzical-drink-5030/blob/main/TravelZilla/controller-screenshots/package-controller.png" alt="booking-controller" />
+<img src="https://github.com/Amrutha010/adamant-jellyfish-2332/blob/main/TravelEase/Controller-Screenshort/package.jpg" />
 
 
 
