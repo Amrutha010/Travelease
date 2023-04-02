@@ -12,7 +12,7 @@ import com.travelease.models.Packages;
 
 public interface PackagesService {
 	
-	public Packages createPackage(Packages pgs) throws BusNotFoundException, RouteNotFoundException, HotelException;
+	public Packages createPackage(Packages pgs  ,Integer busId , Integer hotelId , Integer routeId) throws BusNotFoundException, RouteNotFoundException, HotelException;
 	
 	public List<Packages> AllPackages(Integer id);
 	
