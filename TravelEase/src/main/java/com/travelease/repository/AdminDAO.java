@@ -8,4 +8,5 @@ import com.travelease.models.Admin;
 @Repository
 public interface AdminDAO extends JpaRepository<Admin, Integer>{
 
+	public Admin findByEmail(String email);
 }
