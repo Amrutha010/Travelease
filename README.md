@@ -1,16 +1,18 @@
 # adamant-jellyfish-2332
 Online Trip Management System
-# [TRAVELZILLA - Onile Trip Management System](https://grand-tarsier-842e30.netlify.app)
+# [TRAVLEASE- Onile Trip Management System]
    ![Logo](https://img.shields.io/github/last-commit/Shibshankar01/-quizzical-drink-5030)
    ![Logo](https://img.shields.io/github/languages/code-size/Shibshankar01/-quizzical-drink-5030)
    ![Logo](https://img.shields.io/github/contributors/Shibshankar01/-quizzical-drink-5030)
    
-   ![travel](https://user-images.githubusercontent.com/101733074/208613400-5ca12e8c-4d2f-4546-94e1-662f0df26daf.jpg)
+   ![travel](https://img.icons8.com/office/1x/suitcase.png)
+                       **TRAVELEASE**
 
   
  ## Description
-   Online Trip Management System where a admin can manage the tours, trips, packages and hotels and a Customer can make a booking, payment and also give feedbacks
-   
+   -Online Trip Management System Travelease is designed for making travel affordable and easy to manage.
+   -it have two major modules, where admin is the administerator of the application, it can do the curd operation whereas the user can retrive the         information, book a travel packages, make payments and give feedback of the same.
+     
  ## Tech Stack 💻
 - Java
 - SpringBoot
@@ -30,13 +32,20 @@ Online Trip Management System
   * Routes
   * Hotels
   * Bus
+  * Travel
+  * Bus
   * Booking
   * Tickets
 
 ## Link ✨
-   https://drive.google.com/file/d/1w6_nmxwHunOYnLnAOY2rsBWipp1bWf72/view 
+    https://github.com/Amrutha010/adamant-jellyfish-2332
    
 ## Contributors  😇
+    * KARRI NAGA DURGA AMRUTHA
+    * Arshad Ali
+    * Atul Harsh
+    * Sidra Syed
+    * Vikas sanodiya
 
 
 ## Screenshots  📸
