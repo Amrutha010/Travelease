@@ -45,7 +45,7 @@ Online Trip Management System
    -  [Arshad Ali](https://github.com/Arshada6105)
    -  [Atul Harsh](https://github.com/atulharsh22)
    -  [Sidra Syed](https://github.com/Sayeda-5)
-   -  [Vikas Sanodiya](https://github.com/vikas-0110)
+   -  [Vikas Sanodiya](https://github.com/vikas-011)
 
 ## Screenshots  📸
 
