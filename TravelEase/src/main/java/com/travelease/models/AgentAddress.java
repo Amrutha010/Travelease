@@ -1,9 +1,16 @@
 package com.travelease.models;
 
+
+import jakarta.validation.constraints.Pattern;
+
 public class AgentAddress {
 
+	
+	@Pattern(regexp = "^[A-Za-z\\s]+$")
 	private String city;
+	@Pattern(regexp = "^[A-Za-z\\s]+$")
 	private String state;
+	@Pattern(regexp = "^\\d{6}$")
 	private String pincode;
 	
 	
